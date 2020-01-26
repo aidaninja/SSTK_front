@@ -5,14 +5,14 @@ const Button = props => {
     const {
         children,
         size = "medium",
-        clickHandler,
+        onClick,
         color = "default",
         styles
     } = props;
     return (
         <StyledButton
             style={{ ...styles }}
-            onClick={clickHandler}
+            onClick={onClick}
             size={size}
             color={color}
         >

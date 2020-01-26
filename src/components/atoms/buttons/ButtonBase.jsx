@@ -15,6 +15,7 @@ const Button = props => {
             onClick={onClick}
             size={size}
             color={color}
+            {...props}
         >
             {children}
         </StyledButton>

@@ -5,14 +5,14 @@ const Button = props => {
     const {
         children,
         size = "medium",
-        clickHandler,
+        onClick,
         color = "default",
         styles
     } = props;
     return (
         <StyledButton
             style={{ ...styles }}
-            onClick={clickHandler}
+            onClick={onClick}
             size={size}
             color={color}
         >
@@ -20,6 +20,14 @@ const Button = props => {
         </StyledButton>
     );
 };
+
+const buttonGen = options => {
+    return props => <Button {...props} {...options} />;
+};
+
+export const NormalButton = buttonGen({ color: "default" });
+export const AlertButton = buttonGen({ color: "alert" });
+export const WarningButton = buttonGen({ color: "warning" });
 
 const sizePicker = props => {
     switch (props.size) {

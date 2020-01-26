@@ -1,11 +1,15 @@
 import React from "react";
-import Button from "./ButtonBase";
+import { NormalButton, AlertButton, WarningButton } from "./ButtonBase";
 import { storiesOf } from "@storybook/react";
 
-storiesOf("atom/button", module)
-    .add("default", () => <Button>デフォルト</Button>)
-    .add("alert", () => <Button color="alert">アラート</Button>)
-    .add("warning", () => <Button color="warning">ワーニング</Button>)
-    .add("small", () => <Button size="small">スモール</Button>)
-    .add("medium", () => <Button size="medium">ミディアム</Button>)
-    .add("large", () => <Button size="large">ラージ</Button>);
+storiesOf("atom/button/color", module)
+    .add("default", () => <NormalButton>デフォルト</NormalButton>)
+    .add("alert", () => <AlertButton color="alert">アラート</AlertButton>)
+    .add("warning", () => (
+        <WarningButton color="warning">ワーニング</WarningButton>
+    ));
+
+storiesOf("atom/button/size", module)
+    .add("small", () => <NormalButton size="small">スモール</NormalButton>)
+    .add("medium", () => <NormalButton size="medium">ミディアム</NormalButton>)
+    .add("large", () => <NormalButton size="large">ラージ</NormalButton>);

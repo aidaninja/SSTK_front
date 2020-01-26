@@ -21,6 +21,14 @@ const Button = props => {
     );
 };
 
+const buttonGen = options => {
+    return props => <Button {...props} {...options} />;
+};
+
+export const NormalButton = buttonGen({ color: "default" });
+export const AlertButton = buttonGen({ color: "alert" });
+export const WarningButton = buttonGen({ color: "warning" });
+
 const sizePicker = props => {
     switch (props.size) {
         case "small":

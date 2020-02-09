@@ -67,6 +67,7 @@ const StyledInput = styled.input`
         background: #ebebeb;
         border: none;
         padding: 0.5rem;
+        margin-top: 1rem;
         border-radius: 0.5rem;
         outline: none;
         ${props => sizePicker(props)}

@@ -47,8 +47,8 @@ const sizePicker = props => {
 
 const StyledBox = styled.div`
     && {
-        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.19),
-            0 0.6rem 0.6rem rgba(0, 0, 0, 0.23);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2),
+            0 0.6rem 0.6rem rgba(0, 0, 0, 0.24);
         padding: 3rem;
         border: 0.3rem solid;
         border-radius: 0.5rem;

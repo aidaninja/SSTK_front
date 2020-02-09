@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { NormalBox } from "./BoxBase";
+import { NormalBox } from ".";
 
 const MockComponent = props => {
     return <div>CONTENT</div>;

@@ -1,5 +1,5 @@
 import React from "react";
-import { NormalButton, AlertButton, WarningButton } from "./ButtonBase";
+import { NormalButton, AlertButton, WarningButton } from ".";
 import { storiesOf } from "@storybook/react";
 
 storiesOf("atom/Button/color", module)

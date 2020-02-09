@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { NormalInput, PasswordInput } from "./InputBase";
+import { NormalInput, PasswordInput } from ".";
 
 storiesOf("atom/Input", module)
     .add("default", () => (

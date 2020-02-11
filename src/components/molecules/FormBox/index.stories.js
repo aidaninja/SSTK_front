@@ -1,8 +1,8 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import FormBox from ".";
-import { NormalInput, PasswordInput } from "../../atoms/Inputs";
-import { NormalButton } from "../../atoms/Buttons";
+import { NormalInput, PasswordInput } from "components/atoms/Inputs";
+import { NormalButton } from "components/atoms/Buttons";
 
 const mockProps = {
     name: "ログイン",

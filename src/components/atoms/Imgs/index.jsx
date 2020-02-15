@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Img = props => {
     const { src = "", alt = "", style } = props;
@@ -24,6 +24,27 @@ export const RoundBorderImage = imageGen({
     }
 });
 
+const imageSizePicker = props => {
+    switch (props.size) {
+        case "small":
+            return css`
+                width: 1.5rem;
+                height: 1.5rem;
+            `;
+        case "medium":
+            return css`
+                width: 2.5rem;
+                height: 2.5rem;
+            `;
+        case "large":
+            return css`
+                width: 3.5rem;
+                height: 3.5rem;
+            `;
+        default:
+    }
+};
+
 const StyledImg = styled.img`
     && {
         min-width: 1rem;
@@ -31,5 +52,6 @@ const StyledImg = styled.img`
         max-width: 5rem;
         max-height: 5rem;
         object-fit: cover;
+        ${props => imageSizePicker(props)}
     }
 `;

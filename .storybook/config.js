@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     }
     html{
         font-size: 62.5%;
+        background: #E5E5E5;
     }
     .story-wrapper {
         padding: 2rem;

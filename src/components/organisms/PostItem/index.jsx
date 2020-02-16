@@ -27,9 +27,7 @@ const PostItem = props => {
                     <StyledTags>
                         {map(tags, ({ name }, i) => (
                             <StyledTagWrapper key={`tags_${name}-${i}`}>
-                                <NormalTag key={`tags_${name}-${i}`}>
-                                    {name}
-                                </NormalTag>
+                                <NormalTag>{name}</NormalTag>
                             </StyledTagWrapper>
                         ))}
                     </StyledTags>

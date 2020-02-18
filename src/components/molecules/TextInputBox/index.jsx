@@ -6,18 +6,18 @@ import { TextInputBlock, TextAreaBlock } from "components/atoms/TextInput";
 const TextInputBox = props => {
     const { name = "", input, textarea = false, ...options } = props;
     return (
-        <TextInputBoxWrapper {...options}>
+        <StyledTextInputBox {...options}>
             {name && <StyledLabel>{name}</StyledLabel>}
             {textarea ? (
                 <TextAreaBlock {...input} />
             ) : (
                 <TextInputBlock {...input} />
             )}
-        </TextInputBoxWrapper>
+        </StyledTextInputBox>
     );
 };
 
-const TextInputBoxWrapper = styled(NormalBox)`
+const StyledTextInputBox = styled(NormalBox)`
     && {
         padding: 0.8rem;
         display: flex;

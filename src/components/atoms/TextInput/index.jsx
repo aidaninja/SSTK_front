@@ -58,6 +58,7 @@ const StyledTextarea = styled.textarea`
         font-size: inherit;
         color: inherit;
         height: 100%;
+        resize: none;
     }
 `;
 const StyledTextInputBlock = styled.div`

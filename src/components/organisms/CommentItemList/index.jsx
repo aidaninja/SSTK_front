@@ -20,7 +20,6 @@ export default CommentItemList;
 
 const StyledCommentItemList = styled.ul`
     && {
-        padding: 1rem;
         li {
             :not(:first-child) {
                 margin-top: 1rem;

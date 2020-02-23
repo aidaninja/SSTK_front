@@ -2,6 +2,7 @@ import React from "react";
 import { addDecorator } from "@storybook/react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import { MemoryRouter } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -25,3 +26,5 @@ addDecorator(s => (
         <div className="story-wrapper">{s()}</div>
     </>
 ));
+
+addDecorator(s => <MemoryRouter initialEntries={["/"]}>{s()}</MemoryRouter>);

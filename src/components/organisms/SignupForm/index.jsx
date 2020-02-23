@@ -5,7 +5,12 @@ import { NormalButton } from "components/atoms/Buttons";
 
 //TODO(aida)パスワードを再入力までやるかは要検討
 const SignupForm = props => {
-    const { onUserIdEnter, onUserPasswordEnter, onButtonClick } = props;
+    const {
+        onUserIdEnter,
+        onUserPasswordEnter,
+        onButtonClick,
+        ...options
+    } = props;
 
     const form = {
         name: "サインアップ",
@@ -27,7 +32,7 @@ const SignupForm = props => {
             />
         ]
     };
-    return <FormBox {...form} />;
+    return <FormBox {...form} {...options} />;
 };
 
 export default SignupForm;

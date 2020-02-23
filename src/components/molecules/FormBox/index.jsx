@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { map } from "lodash";
 
 const FormBox = props => {
-    const { inputs, buttons, name } = props;
+    const { inputs, buttons, name, ...options } = props;
     return (
-        <StyledForm>
+        <StyledForm {...options}>
             <StyledFormName>{name}</StyledFormName>
             <StyledFromInputWrapper>
                 {map(inputs, input => (

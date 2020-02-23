@@ -1,9 +1,6 @@
 import React from "react";
-// import styled from "styled-components";
 import { Image } from "components/atoms/Imgs";
-
-//TODO(aida) Emoji用のコンスタントを作成アンドインポート
-//TODO(aida) props.nameの値でEmojiコンスタントから絵文字を参照して表示する
+import emojis from "img/emoji";
 
 const Emoji = props => {
     const { name, size = "medium", style } = props;
@@ -25,7 +22,13 @@ const Emoji = props => {
         width: `${emojiWH}rem`,
         height: `${emojiWH}rem`
     };
-    return <Image alt={`icon_${name}`} style={{ ...style, ...emojiStyle }} />;
+    return (
+        <Image
+            src={`${emojis[name]}`}
+            alt={`icon_${name}`}
+            style={{ ...style, ...emojiStyle }}
+        />
+    );
 };
 
 export default Emoji;

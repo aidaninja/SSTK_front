@@ -4,7 +4,12 @@ import { NormalInput, PasswordInput } from "components/atoms/Inputs";
 import { NormalButton } from "components/atoms/Buttons";
 
 const LoginForm = props => {
-    const { onUserIdEnter, onUserPasswordEnter, onButtonClick } = props;
+    const {
+        onUserIdEnter,
+        onUserPasswordEnter,
+        onButtonClick,
+        ...options
+    } = props;
     const form = {
         name: "ログイン",
         buttons: [
@@ -25,7 +30,7 @@ const LoginForm = props => {
             />
         ]
     };
-    return <FormBox {...form} />;
+    return <FormBox {...form} {...options} />;
 };
 
 export default LoginForm;

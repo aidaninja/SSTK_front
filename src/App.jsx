@@ -1,6 +1,9 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import Signup from "components/pages/Signup";
+import Login from "components/pages/Login";
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -11,19 +14,24 @@ const GlobalStyle = createGlobalStyle`
     }
     html{
         font-size: 62.5%;
+        background: #E5E5E5;
     }
 `;
 
 function App() {
     return (
-        <>
+        <Router>
             <GlobalStyle />
-            <div className="App">
-                <header className="App-header">
-                    <h1>精神と時の部屋</h1>
-                </header>
-            </div>
-        </>
+            <Switch>
+                <Route path="/signup">
+                    <Signup />
+                </Route>
+                <Route exact path="/">
+                    {/* TODO(aida) ログイン状態ではないとき常にログイン画面に遷移*/}
+                    <Login />
+                </Route>
+            </Switch>
+        </Router>
     );
 }
 

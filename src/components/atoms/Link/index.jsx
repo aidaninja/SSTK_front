@@ -18,6 +18,7 @@ const activeStyle = props => {
     if (!props.selected) return;
     return css`
         && {
+            color: #3722d3;
             font-weight: bold;
             border-bottom: 0.1rem solid #3722d3;
         }
@@ -25,7 +26,7 @@ const activeStyle = props => {
 };
 const StyledLink = styled(Link)`
     && {
-        color: #3722d3;
+        color: #042333;
         text-decoration: none;
         ${props => activeStyle(props)}
     }

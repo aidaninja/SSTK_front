@@ -11,7 +11,7 @@ const SignupForm = props => {
         name: "サインアップ",
         buttons: [
             <NormalButton onClick={onButtonClick} size="small">
-                登録
+                サインアップ
             </NormalButton>
         ],
         inputs: [

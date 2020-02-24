@@ -65,6 +65,8 @@ const Home = props => {
                 </StyledPageNavigation>
                 <StyledPageContent>
                     <PageHeader>HOME</PageHeader>
+                    {/* TODO(aida)リストがない場合は新規投稿を促す表示をする */}
+                    {/* TODO(aida)ローディング中はローディング表示 */}
                     <PostItemList {...mockPostsProps} />
                 </StyledPageContent>
             </StyledPageLayout>
@@ -74,6 +76,7 @@ const Home = props => {
 
 export default Home;
 
+//TODO(aida)PageLayoutk系はどっかにまとめる
 const StyledPageLayout = styled.div`
     && {
         display: flex;

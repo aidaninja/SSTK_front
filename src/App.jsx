@@ -42,7 +42,7 @@ const App = () => {
                 </Route>
                 <Route exact path="/">
                     {/* TODO(aida) ログイン状態ではないとき常にログイン画面に遷移*/}
-                    {!!authUser ? <Home /> : <Login />}
+                    {!!authUser ? <Home user={authUser} /> : <Login />}
                 </Route>
             </Switch>
         </Router>

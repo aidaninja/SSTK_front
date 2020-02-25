@@ -12,7 +12,7 @@ const GlobalNavigation = props => {
     const navigationItems = [
         {
             name: "Home",
-            path: "/home",
+            path: "/",
             image: { src: get(icon, "dark.home", ""), alt: "home" },
             type: ""
         },

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import { auth } from "utils/firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "utils/firebase/firebase.utils";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "components/pages/Signup";
 import Login from "components/pages/Login";
@@ -24,9 +24,20 @@ const App = () => {
     const [authUser, setAuthUser] = useState(null);
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            setAuthUser(user);
-            console.log(user);
+        //MEMO(aida) 認証情報の状態が変化した際に実行する処理を登録する
+        const unsubscribe = auth.onAuthStateChanged(async userAuth => {
+            //MEMO(aida) ログインした際に認証に紐づいたuser情報をstateに格納
+            if (!!userAuth) {
+                const userRef = await createUserProfileDocument(userAuth);
+                console.log(userRef);
+                userRef.onSnapshot(snapShot => {
+                    setAuthUser({ id: snapShot.id, ...snapShot.data() });
+                });
+            }
+            //MEMO(aida)  サインアウトした際にstateをnullにする
+            if (!userAuth) {
+                setAuthUser(null);
+            }
         });
         return () => {
             unsubscribe();

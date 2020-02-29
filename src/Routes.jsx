@@ -6,7 +6,7 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "components/pages/Signup";
 import Login from "components/pages/Login";
 import Home from "components/pages/Home";
-import { AuthUserContext } from "contexts";
+import { GlobalStateContext } from "contexts";
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -22,9 +22,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Routes = () => {
-    // const [authUser, setAuthUser] = useState(null);
-
-    const { authUser, setAuthUser } = useContext(AuthUserContext);
+    const { authUser, setAuthUser } = useContext(GlobalStateContext);
     console.log(authUser, 'Provider authUser');
 
     useEffect(() => {

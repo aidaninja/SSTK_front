@@ -1,1 +1,1 @@
-export { AuthUserContext, AuthUserProvider } from "./AuthUser";
+export { GlobalStateContext, GlobalStateProvider } from "./GlobalStates";

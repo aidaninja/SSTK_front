@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { AuthUserProvider } from 'contexts';
+import { GlobalStateProvider } from 'contexts';
 import Routes from './Routes';
 
 const App = () => (
-    <AuthUserProvider>
+    <GlobalStateProvider>
         <Routes />
-    </AuthUserProvider>
+    </GlobalStateProvider>
 );
 
 export default App;

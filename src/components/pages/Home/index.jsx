@@ -5,6 +5,7 @@ import PageHeader from "components/organisms/PageHeader";
 import PostItemList from "components/organisms/PostItemList";
 import { auth } from "utils/firebase/firebase.utils";
 
+//TODO(aida) 仮の表示用のため実装が完了時、削除する。
 const mockPostsProps = {
     postItems: [
         {

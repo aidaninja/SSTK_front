@@ -8,6 +8,7 @@ const LoginForm = props => {
         onUserIdEnter,
         onUserPasswordEnter,
         onButtonClick,
+        loginWithGoogle,
         ...options
     } = props;
     const form = {
@@ -15,6 +16,9 @@ const LoginForm = props => {
         buttons: [
             <NormalButton onClick={onButtonClick} size="small">
                 ログイン
+            </NormalButton>,
+            <NormalButton onClick={loginWithGoogle} size="small">
+                Googleでログイン
             </NormalButton>
         ],
         inputs: [

@@ -1,9 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import GlobalNavigation from "components/organisms/GlobalNavigation";
+import PageLayout from "components/templates/PageLayout";
 import PageHeader from "components/organisms/PageHeader";
 import PostItemList from "components/organisms/PostItemList";
-import { auth } from "utils/firebase/firebase.utils";
 
 //TODO(aida) 仮の表示用のため実装が完了時、削除する。
 const mockPostsProps = {
@@ -51,54 +49,14 @@ const Home = props => {
     const { user } = props;
     return (
         <>
-            <StyledPageLayout>
-                <StyledPageNavigation>
-                    <GlobalNavigation />
-                    {!!user && (
-                        <button
-                            onClick={() => {
-                                auth.signOut();
-                            }}
-                        >
-                            ログアウト
-                        </button>
-                    )}
-                </StyledPageNavigation>
-                <StyledPageContent>
-                    <PageHeader>HOME</PageHeader>
-                    {/* TODO(aida)リストがない場合は新規投稿を促す表示をする */}
-                    {/* TODO(aida)ローディング中はローディング表示 */}
-                    <PostItemList {...mockPostsProps} />
-                </StyledPageContent>
-            </StyledPageLayout>
+            <PageLayout user={user}>
+                <PageHeader>HOME</PageHeader>
+                {/* TODO(aida)リストがない場合は新規投稿を促す表示をする */}
+                {/* TODO(aida)ローディング中はローディング表示 */}
+                <PostItemList {...mockPostsProps} />
+            </PageLayout>
         </>
     );
 };
 
 export default Home;
-
-//TODO(aida)PageLayoutk系はどっかにまとめる
-const StyledPageLayout = styled.div`
-    && {
-        display: flex;
-        max-width: 98rem;
-        margin: 0 auto;
-        padding: 2rem 0;
-    }
-`;
-
-const StyledPageNavigation = styled.div`
-    && {
-        min-width: 18rem;
-        padding-top: 1rem;
-    }
-`;
-
-const StyledPageContent = styled.div`
-    && {
-        width: 100%;
-        > *:not(:first-child) {
-            margin-top: 3rem;
-        }
-    }
-`;

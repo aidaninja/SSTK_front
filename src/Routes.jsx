@@ -6,6 +6,7 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "components/pages/Signup";
 import Login from "components/pages/Login";
 import Home from "components/pages/Home";
+import Post from "components/pages/Post";
 import { GlobalStateContext } from "contexts";
 
 const GlobalStyle = createGlobalStyle`
@@ -23,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
 
 const Routes = () => {
     const { authUser, setAuthUser } = useContext(GlobalStateContext);
-    console.log(authUser, 'Provider authUser');
+    console.log(authUser, "Provider authUser");
 
     useEffect(() => {
         //MEMO(aida) 認証情報の状態が変化した際に実行する処理を登録する
@@ -49,15 +50,21 @@ const Routes = () => {
     return (
         <Router>
             <GlobalStyle />
-            <Switch>
-                <Route path="/signup">
-                    <Signup />
-                </Route>
-                <Route exact path="/">
-                    {/* TODO(aida) ログイン状態ではないとき常にログイン画面に遷移*/}
-                    {!!authUser ? <Home user={authUser} /> : <Login />}
-                </Route>
-            </Switch>
+            {!!authUser ? (
+                <Switch>
+                    <Route path="/signup">
+                        <Signup />
+                    </Route>
+                    <Route exact path="/">
+                        <Home user={authUser} />
+                    </Route>
+                    <Route exact path="/post">
+                        <Post user={authUser} />
+                    </Route>
+                </Switch>
+            ) : (
+                <Login />
+            )}
         </Router>
     );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const TextInput = props => {
-    const { placeholder, onChange, defaultValue = "", type = "input" } = props;
+    const { placeholder, onChange, type = "input", ...restProps } = props;
 
     let Component;
     switch (type) {
@@ -20,7 +20,7 @@ const TextInput = props => {
             <Component
                 onChange={onChange}
                 placeholder={placeholder}
-                defaultValue={defaultValue}
+                {...restProps}
             />
         </StyledTextInputBlock>
     );

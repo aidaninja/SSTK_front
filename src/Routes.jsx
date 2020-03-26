@@ -6,7 +6,9 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "components/pages/Signup";
 import Login from "components/pages/Login";
 import Home from "components/pages/Home";
+import CreatePost from "components/pages/CreatePost";
 import Post from "components/pages/Post";
+import Profile from "components/pages/Profile";
 import { GlobalStateContext } from "contexts";
 
 const GlobalStyle = createGlobalStyle`
@@ -18,7 +20,8 @@ const GlobalStyle = createGlobalStyle`
     }
     html{
         font-size: 62.5%;
-        background: #E5E5E5;
+        background: #150E2E;
+        color: #ECECEC;
     }
 `;
 
@@ -52,18 +55,28 @@ const Routes = () => {
             <GlobalStyle />
             {!!authUser ? (
                 <Switch>
-                    <Route path="/signup">
-                        <Signup />
-                    </Route>
                     <Route exact path="/">
                         <Home user={authUser} />
                     </Route>
                     <Route exact path="/post">
+                        <CreatePost user={authUser} />
+                    </Route>
+                    <Route path="/post/:postId">
                         <Post user={authUser} />
+                    </Route>
+                    <Route path="profile/?:userId">
+                        <Profile user={authUser} />
                     </Route>
                 </Switch>
             ) : (
-                <Login />
+                <Switch>
+                    <Route path="/signup">
+                        <Signup />
+                    </Route>
+                    <Route path="/">
+                        <Login />
+                    </Route>
+                </Switch>
             )}
         </Router>
     );

@@ -8,13 +8,17 @@ const FormBox = props => {
         <StyledForm {...options}>
             <StyledFormName>{name}</StyledFormName>
             <StyledFromInputWrapper>
-                {map(inputs, input => (
-                    <StyledFromInput>{input}</StyledFromInput>
+                {map(inputs, (input, i) => (
+                    <StyledFromInput key={`input_${i}`}>
+                        {input}
+                    </StyledFromInput>
                 ))}
             </StyledFromInputWrapper>
             <StyledFormButtonWrapper>
-                {map(buttons, button => (
-                    <StyledFormButton>{button}</StyledFormButton>
+                {map(buttons, (button, i) => (
+                    <StyledFormButton key={`button_${i}`}>
+                        {button}
+                    </StyledFormButton>
                 ))}
             </StyledFormButtonWrapper>
         </StyledForm>
@@ -23,10 +27,10 @@ const FormBox = props => {
 
 const StyledForm = styled.div`
     && {
-        background: #ffffff;
+        background: #2d2742;
         padding: 4rem 6rem;
-        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2),
-            0 0.6rem 0.6rem rgba(0, 0, 0, 0.24);
+        /* box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2),
+            0 0.6rem 0.6rem rgba(0, 0, 0, 0.24); */
         max-width: 38rem;
     }
 `;

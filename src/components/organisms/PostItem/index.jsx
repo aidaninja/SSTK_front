@@ -4,25 +4,26 @@ import { map, get } from "lodash";
 import { NormalBox } from "components/atoms/Box";
 import { NormalTag } from "components/atoms/Tags";
 import ImageText from "components/molecules/ImageText";
-
-//NOTE(aida) clickされたときの遷移先はこのコンポーネントでは関心しない
 const PostItem = props => {
     const { tags, title, user, postedOn, status } = props;
+    const postedDate = new Date(postedOn.seconds * 1000);
     return (
         <StyledNormalBox>
             <div>
-                <StyledPostHeader>posted {postedOn}</StyledPostHeader>
+                <StyledPostHeader>
+                    posted {postedDate.toLocaleDateString("en-US")}
+                </StyledPostHeader>
                 <StyledPostTitle>{title}</StyledPostTitle>
                 <StyledPostFooter>
                     <ImageText
                         image={{
                             src: get(user, "src"),
-                            alt: get(user, "name")
+                            alt: get(user, "displayName")
                         }}
                         size="medium"
                         type="round"
                     >
-                        {get(user, "name")}
+                        {get(user, "displayName")}
                     </ImageText>
                     <StyledTags>
                         {map(tags, ({ name }, i) => (
@@ -56,7 +57,6 @@ const StyledStatus = styled.div`
 `;
 const StyledPostHeader = styled.div`
     && {
-        color: #444;
     }
 `;
 const StyledPostTitle = styled.p`

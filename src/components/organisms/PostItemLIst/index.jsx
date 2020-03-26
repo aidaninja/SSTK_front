@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { map } from "lodash";
 import PostItem from "components/organisms/PostItem";
 
@@ -8,12 +9,12 @@ const PostItemList = props => {
 
     return (
         <StyledPostItemList>
-            {/* TODO(aida) Linkでwrap */}
-            {map(postItems, ({ id, ...postItem }) => {
-                console.log(id, postItem);
+            {map(postItems, ({ id, ...postItem }, i) => {
                 return (
-                    <li key={`post_${id}`}>
-                        <PostItem {...postItem} />
+                    <li key={`post_${id}-${i}`}>
+                        <Link to={`/post/${id}`}>
+                            <PostItem {...postItem} />
+                        </Link>
                     </li>
                 );
             })}
@@ -29,6 +30,10 @@ const StyledPostItemList = styled.ul`
             cursor: pointer;
             :not(:first-child) {
                 margin-top: 2rem;
+            }
+            a {
+                text-decoration: none;
+                color: #ececec;
             }
         }
     }

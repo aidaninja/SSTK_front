@@ -16,14 +16,19 @@ const Post = props => {
 
     useEffect(() => {
         //TODO(aida) utils/firebase/firebase.utilsに切り分ける
-        const fetchPost = async () => {
-            const snapShot = await postRef.get();
-            const { commentItems = [], ...postData } = snapShot.data();
-            updatePost(postData);
-            updateCommentItems(commentItems);
+        const fetchPost = () => {
+            const unsubscribe = postRef.onSnapshot(snapshot => {
+                const { commentItems = [], ...postData } = snapshot.data();
+                updatePost(postData);
+                updateCommentItems(commentItems);
+            });
+            return unsubscribe;
         };
-        fetchPost();
-    }, [postId]);
+        const unsubscribe = fetchPost();
+        return () => {
+            unsubscribe();
+        };
+    }, [postId, postRef]);
 
     const onSubmitComment = async e => {
         e.preventDefault();
@@ -31,24 +36,24 @@ const Post = props => {
             console.log("[comment] no comment");
             return;
         }
-        const snapShot = await postRef.get();
-        const currentPostDocument = snapShot.data();
+        const snapshot = await postRef.get();
+        const currentPostDocument = snapshot.data();
         const { commentItems = [] } = currentPostDocument;
+        const createdAt = new Date();
         const newCommentItems = [
             ...commentItems,
-            { comment: comment, user: user }
+            { comment: comment, user: user, createdAt }
         ];
         try {
+            updateComment("");
             await postRef.set({
                 ...currentPostDocument,
                 commentItems: newCommentItems
             });
-            updateCommentItems(newCommentItems);
         } catch (error) {
+            updateComment(comment);
             console.log("error adding comment", error.message);
         }
-        updateComment("");
-        console.log("comment done");
     };
 
     const onComment = e => {

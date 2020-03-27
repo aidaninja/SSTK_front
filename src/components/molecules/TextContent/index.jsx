@@ -32,5 +32,6 @@ const StyledText = styled.p`
         margin-top: 1rem;
         font-size: 1.4rem;
         line-height: 1.8;
+        white-space: pre-wrap;
     }
 `;

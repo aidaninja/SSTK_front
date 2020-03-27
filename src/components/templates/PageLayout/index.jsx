@@ -11,7 +11,7 @@ const PageLayout = props => {
         <>
             <StyledPageLayout>
                 <StyledPageNavigation>
-                    <GlobalNavigation />
+                    <GlobalNavigation user={user} />
                     {!!user && (
                         <NormalButton
                             onClick={() => {

@@ -12,7 +12,7 @@ const CommentItem = props => {
                 {/* TODO(aida) クリックしたときにプロフィールに遷移するようにする */}
                 <ImageText
                     image={{
-                        src: get(user, "src"),
+                        src: get(user, "photoURL"),
                         alt: get(user, "displayName")
                     }}
                     size="medium"

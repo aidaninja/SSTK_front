@@ -17,7 +17,7 @@ const PostItem = props => {
                 <StyledPostFooter>
                     <ImageText
                         image={{
-                            src: get(user, "src"),
+                            src: get(user, "photoURL"),
                             alt: get(user, "displayName")
                         }}
                         size="medium"

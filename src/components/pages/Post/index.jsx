@@ -13,11 +13,11 @@ const Post = props => {
     const [commentItems, updateCommentItems] = useState([]);
     const [comment, updateComment] = useState("");
     const postRef = firestore.doc(`posts/${postId}`);
-
     useEffect(() => {
         //TODO(aida) utils/firebase/firebase.utilsに切り分ける
         const fetchPost = () => {
             const unsubscribe = postRef.onSnapshot(snapshot => {
+                if (!snapshot.exists) return unsubscribe;
                 const { commentItems = [], ...postData } = snapshot.data();
                 updatePost(postData);
                 updateCommentItems(commentItems);
@@ -28,7 +28,7 @@ const Post = props => {
         return () => {
             unsubscribe();
         };
-    }, [postId, postRef]);
+    }, []);
 
     const onSubmitComment = async e => {
         e.preventDefault();

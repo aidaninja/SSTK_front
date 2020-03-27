@@ -24,7 +24,7 @@ const GlobalNavigation = props => {
         },
         {
             name: "profile",
-            path: `/${get(user, "name", "")}`,
+            path: `/profile/${get(user, "name", "")}`,
             image: {
                 src: get(
                     user,
@@ -45,7 +45,7 @@ const GlobalNavigation = props => {
                 {map(navigationItems, (item, i) => {
                     const { name, path, image, type } = item;
                     return (
-                        <StyledGlobalNavigationItem>
+                        <StyledGlobalNavigationItem key={`${name}_${i}`}>
                             <Lnk to={path}>
                                 <ImageText
                                     size="large"
@@ -79,7 +79,6 @@ const StyldGlobalNavigationHeader = styled.p`
         text-align: center;
         font-size: 1.4rem;
         font-weight: bold;
-        color: #042333;
     }
 `;
 

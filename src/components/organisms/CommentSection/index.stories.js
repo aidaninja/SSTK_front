@@ -12,7 +12,7 @@ const mockProps = {
         {
             id: 0,
             user: {
-                name: "Yuki Inoue",
+                displayName: "Yuki Inoue",
                 src:
                     "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
             },
@@ -22,7 +22,7 @@ const mockProps = {
         {
             id: 0,
             user: {
-                name: "Jun Aida",
+                displayName: "Jun Aida",
                 src:
                     "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
             },

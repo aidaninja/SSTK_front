@@ -9,12 +9,16 @@ const CommentItem = props => {
     return (
         <StyledComment>
             <StyledCommentHeader>
+                {/* TODO(aida) クリックしたときにプロフィールに遷移するようにする */}
                 <ImageText
-                    image={{ src: get(user, "src"), alt: get(user, "name") }}
+                    image={{
+                        src: get(user, "src"),
+                        alt: get(user, "displayName")
+                    }}
                     size="medium"
                     type="round"
                 >
-                    {get(user, "name")}
+                    {get(user, "displayName")}
                 </ImageText>
                 {/* TODO(aida) リアクションボタンを追加予定 */}
             </StyledCommentHeader>
@@ -43,6 +47,7 @@ const StyledCommentMain = styled.div`
     && {
         padding: 1rem 2rem;
         font-size: 1.6rem;
+        white-space: pre-wrap;
     }
 `;
 const StyledCommentFooter = styled.div`

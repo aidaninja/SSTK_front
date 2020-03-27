@@ -4,9 +4,9 @@ import { NormalButton } from "components/atoms/Buttons";
 import TextInputBox from "components/molecules/TextInputBox";
 
 const CommentInput = props => {
-    const { onClick, input, ...options } = props;
+    const { onClick, input } = props;
     return (
-        <StyledCommentInput {...options}>
+        <StyledCommentInput>
             <TextInputBox input={input} textarea={true} />
             <StyledCommentButton size="small" onClick={onClick}>
                 コメント

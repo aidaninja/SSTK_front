@@ -2,8 +2,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const Img = props => {
-    const { src = "", alt = "", style } = props;
-    return <StyledImg src={src} alt={alt} style={style} {...props} />;
+    const { src = "", alt = "", style, ...restProps } = props;
+    return <StyledImg src={src} alt={alt} style={style} {...restProps} />;
 };
 
 const imageGen = options => {
@@ -12,16 +12,11 @@ const imageGen = options => {
 
 export const Image = imageGen();
 export const RoundImage = imageGen({
-    style: {
-        borderRadius: "50%",
-        background: "#efefef"
-    }
+    shape: "round"
 });
 export const RoundBorderImage = imageGen({
-    style: {
-        borderRadius: "50%",
-        border: ".3rem solid #3722d3"
-    }
+    shape: "round",
+    border: "medium"
 });
 
 const imageSizePicker = props => {
@@ -45,6 +40,30 @@ const imageSizePicker = props => {
     }
 };
 
+const imageShapePicker = props => {
+    switch (props.shape) {
+        case "round":
+            return css`
+                border-radius: 50%;
+            `;
+        default:
+    }
+};
+
+const imageBorderPicker = props => {
+    switch (props.border) {
+        case "small":
+            return css`
+                border: 0.1rem solid #efefef;
+            `;
+        case "medium":
+            return css`
+                border: 0.3rem solid #efefef;
+            `;
+        default:
+    }
+};
+
 const StyledImg = styled.img`
     && {
         min-width: 1rem;
@@ -53,5 +72,7 @@ const StyledImg = styled.img`
         max-height: 5rem;
         object-fit: cover;
         ${props => imageSizePicker(props)}
+        ${props => imageShapePicker(props)}
+        ${props => imageBorderPicker(props)}
     }
 `;

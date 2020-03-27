@@ -8,7 +8,7 @@ const mockProps = {
     postedOn: "02/17/2020",
     user: {
         displayName: "Jun Aida",
-        src:
+        pictureURL:
             "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
     },
     status: "🔥"

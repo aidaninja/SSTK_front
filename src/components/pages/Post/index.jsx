@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import PageLayout from "components/templates/PageLayout";
 import PageHeader from "components/organisms/PageHeader";
@@ -15,6 +16,7 @@ const Post = props => {
     const postRef = firestore.doc(`posts/${postId}`);
     useEffect(() => {
         //TODO(aida) utils/firebase/firebase.utilsに切り分ける
+        //TODO(aida) ユーザとコメントや投稿の紐付けを最適化する。現状ユーザ情報が変更されたときに紐づいている要素の情報が更新できていない。
         const fetchPost = () => {
             const unsubscribe = postRef.onSnapshot(snapshot => {
                 if (!snapshot.exists) return unsubscribe;
@@ -76,9 +78,19 @@ const Post = props => {
         <PageLayout user={user}>
             <PageHeader>{post.title}</PageHeader>
             <PostOverview {...post} />
-            <CommentSection {...commentProps} />
+            <div>
+                <StyledLabel>コメント</StyledLabel>
+                <CommentSection {...commentProps} />
+            </div>
         </PageLayout>
     );
 };
 
 export default withRouter(Post);
+
+const StyledLabel = styled.p`
+    && {
+        font-size: 1.4rem;
+        padding: 1rem 0;
+    }
+`;

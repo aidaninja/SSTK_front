@@ -23,7 +23,7 @@ const GlobalNavigation = props => {
             type: ""
         },
         {
-            name: "profile",
+            name: "Profile",
             path: `/profile/${get(user, "id", "")}`,
             image: {
                 src: get(

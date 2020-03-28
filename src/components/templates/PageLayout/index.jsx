@@ -38,7 +38,7 @@ const StyledPageLayout = styled.div`
         display: flex;
         max-width: 98rem;
         margin: 0 auto;
-        padding: 2rem 0;
+        padding: 2rem 1rem;
     }
 `;
 

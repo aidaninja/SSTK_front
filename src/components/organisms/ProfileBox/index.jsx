@@ -9,7 +9,7 @@ const ProfileBox = props => {
     const { user, onEditProfile, isOwner, ...restProps } = props;
     return (
         <StyledProfileBox>
-            <StyledProfileImage border="medium" src={get(user, "pictureURL")} />
+            <StyledProfileImage border="medium" src={get(user, "photoURL")} />
             <StyledUser>
                 <StyledUserName>{get(user, "displayName")}</StyledUserName>
                 {isOwner ? (
@@ -17,7 +17,7 @@ const ProfileBox = props => {
                         EDIT
                     </StyledEditButton>
                 ) : null}
-                <StyledUserDetail>{get(user, "detail")}</StyledUserDetail>
+                <StyledUserDetail>{get(user, "intro")}</StyledUserDetail>
             </StyledUser>
         </StyledProfileBox>
     );
@@ -53,7 +53,7 @@ const StyledUser = styled.div`
 const StyledUserName = styled.h1`
     && {
         font-size: 5.2rem;
-        font-weight: 700;
+        font-weight: bold;
     }
 `;
 
@@ -61,7 +61,7 @@ const StyledEditButton = styled(AlertButton)`
     && {
         margin-top: auto;
         width: 10rem;
-        font-weight: 700;
+        font-weight: bold;
     }
 `;
 

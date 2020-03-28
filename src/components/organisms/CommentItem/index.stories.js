@@ -5,7 +5,7 @@ import CommentItem from ".";
 const mockProps = {
     user: {
         name: "Jun Aida",
-        src:
+        photoURL:
             "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
     },
     comment: "floatじゃなくてdisplay: flexを使えばもっと簡単にできるよ。"

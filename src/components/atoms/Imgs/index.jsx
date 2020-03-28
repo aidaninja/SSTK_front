@@ -1,12 +1,20 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
+const defaultImage =
+    "https://firebasestorage.googleapis.com/v0/b/sstk-e441a.appspot.com/o/profile%2Fdefault.png?alt=media&token=0df1d487-89f8-4696-a9ec-3b6af0c5f904";
+
 const Img = props => {
-    const { src = "", alt = "", style, ...restProps } = props;
+    const { src, alt = "", style, ...restProps } = props;
 
     return (
-        <StyledImg src={src} alt={alt} style={style} {...restProps}>
-            <img src={src} alt={alt} />
+        <StyledImg
+            src={src || defaultImage}
+            alt={alt}
+            style={style}
+            {...restProps}
+        >
+            <img src={src || defaultImage} alt={alt} />
         </StyledImg>
     );
 };

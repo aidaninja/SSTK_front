@@ -7,7 +7,7 @@ const mockProps = {
         displayName: "jun aida",
         photoURL:
             "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png",
-        detail: "Iam a web developer from Japan."
+        intro: "Iam a web developer from Japan."
     },
     isOwner: true
 };

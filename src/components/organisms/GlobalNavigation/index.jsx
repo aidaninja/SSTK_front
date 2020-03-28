@@ -23,12 +23,12 @@ const GlobalNavigation = props => {
             type: ""
         },
         {
-            name: "profile",
-            path: `/profile/${get(user, "name", "")}`,
+            name: "Profile",
+            path: `/profile/${get(user, "id", "")}`,
             image: {
                 src: get(
                     user,
-                    "profile",
+                    "photoURL",
                     "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
                 ),
                 alt: "profile"

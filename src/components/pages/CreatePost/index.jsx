@@ -95,10 +95,10 @@ const CreatePost = props => {
                     <PageHeader>{postInput.title || "タイトル"}</PageHeader>
                     <PostOverview {...postInput} />
                     <StyledButtonWrapper>
-                        <NormalButton onClick={onPreviewHandle}>
+                        <NormalButton size="small" onClick={onPreviewHandle}>
                             戻る
                         </NormalButton>
-                        <NormalButton onClick={onSubmitHandle}>
+                        <NormalButton size="small" onClick={onSubmitHandle}>
                             投稿する
                         </NormalButton>
                     </StyledButtonWrapper>
@@ -128,10 +128,10 @@ const CreatePost = props => {
                         })}
                     </StyledDetailInputWrapper>
                     <StyledButtonWrapper>
-                        <NormalButton onClick={onPreviewHandle}>
+                        <NormalButton size="small" onClick={onPreviewHandle}>
                             プレビュー
                         </NormalButton>
-                        <NormalButton onClick={onSubmitHandle}>
+                        <NormalButton size="small" onClick={onSubmitHandle}>
                             投稿する
                         </NormalButton>
                     </StyledButtonWrapper>

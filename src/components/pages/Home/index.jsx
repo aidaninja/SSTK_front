@@ -10,7 +10,6 @@ const Home = props => {
     const [postItems, updatePostItems] = useState([]);
 
     useEffect(() => {
-        console.log("top page...");
         const fetchData = () => {
             const postListRef = firestore.collection("posts");
             const unsubscribe = postListRef.onSnapshot(snapshot => {
@@ -20,14 +19,8 @@ const Home = props => {
                     return { id, title, postedOn, user };
                 });
                 snapshot.docChanges().forEach(change => {
-                    const doc = change.doc;
                     if (change.type === "added") {
-                        const id = doc.id;
-                        const { title, postedOn, user } = doc.data();
-                        updatePostItems([
-                            ...fetchedList,
-                            { id, title, postedOn, user }
-                        ]);
+                        updatePostItems([...fetchedList]);
                     }
                 });
             });
@@ -38,8 +31,6 @@ const Home = props => {
             unsubscribe();
         };
     }, []);
-
-    console.log(postItems);
 
     return (
         <>

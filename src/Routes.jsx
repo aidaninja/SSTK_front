@@ -22,6 +22,12 @@ const GlobalStyle = createGlobalStyle`
         font-size: 62.5%;
         background: #150E2E;
         color: #ECECEC;
+        overflow-y: scroll;
+    }
+    a{
+        text-decoration: none;
+        color: inherit;
+        display: block;
     }
 `;
 
@@ -64,7 +70,7 @@ const Routes = () => {
                     <Route path="/post/:postId">
                         <Post user={authUser} />
                     </Route>
-                    <Route path="profile/?:userId">
+                    <Route path="/profile/:userId">
                         <Profile user={authUser} />
                     </Route>
                 </Switch>

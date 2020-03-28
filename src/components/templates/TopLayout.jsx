@@ -5,7 +5,7 @@ const TopLayout = props => {
     const { children } = props;
     return (
         <StyledWrapper>
-            <StyledHeader>精神と時の部屋</StyledHeader>
+            <StyledHeader>精神と時の部屋α</StyledHeader>
             {children}
         </StyledWrapper>
     );

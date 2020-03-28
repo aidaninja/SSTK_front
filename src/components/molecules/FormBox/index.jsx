@@ -6,7 +6,7 @@ const FormBox = props => {
     const { inputs, buttons, name, ...options } = props;
     return (
         <StyledForm {...options}>
-            <StyledFormName>{name}</StyledFormName>
+            {name ? <StyledFormName>{name}</StyledFormName> : null}
             <StyledFromInputWrapper>
                 {map(inputs, (input, i) => (
                     <StyledFromInput key={`input_${i}`}>
@@ -44,20 +44,26 @@ const StyledFormName = styled.p`
 
 const StyledFromInputWrapper = styled.div`
     && {
-        margin-top: 6rem;
+        :not(:first-child) {
+            margin-top: 6rem;
+        }
     }
 `;
 
 const StyledFromInput = styled.div`
     && {
-        margin-top: 4rem;
+        :not(:first-child) {
+            margin-top: 4rem;
+        }
     }
 `;
 
 const StyledFormButtonWrapper = styled.div`
     && {
         margin-top: 6rem;
-        text-align: center;
+        /* text-align: center; */
+        display: flex;
+        justify-content: space-evenly;
     }
 `;
 

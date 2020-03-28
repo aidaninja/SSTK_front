@@ -3,7 +3,12 @@ import styled, { css } from "styled-components";
 
 const Img = props => {
     const { src = "", alt = "", style, ...restProps } = props;
-    return <StyledImg src={src} alt={alt} style={style} {...restProps} />;
+
+    return (
+        <StyledImg src={src} alt={alt} style={style} {...restProps}>
+            <img src={src} alt={alt} />
+        </StyledImg>
+    );
 };
 
 const imageGen = options => {
@@ -64,15 +69,21 @@ const imageBorderPicker = props => {
     }
 };
 
-const StyledImg = styled.img`
+const StyledImg = styled.div`
     && {
+        display: inline-block;
         min-width: 1rem;
         min-height: 1rem;
         max-width: 5rem;
         max-height: 5rem;
-        object-fit: cover;
+        background: ${props => `url(${props.src})`};
+        background-position: center;
+        background-size: cover;
         ${props => imageSizePicker(props)}
         ${props => imageShapePicker(props)}
         ${props => imageBorderPicker(props)}
+        img {
+            display: none;
+        }
     }
 `;

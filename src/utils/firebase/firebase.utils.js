@@ -1,12 +1,14 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/storage";
 
 //MEMO(aida) 同じ階層にあるfirebase.config.js内のconfigを設定してください。
 import config from "./firebase.config";
 
 firebase.initializeApp(config);
 
+//User情報をfirestoreに追加するための関数
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
 
@@ -14,13 +16,13 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     const userRef = firestore.doc(`users/${userAuth.uid}`);
 
     const snapShot = await userRef.get();
-    console.log(snapShot);
     //MEMO(aida) 2: userがfirebase dbに未登録の場合は登録する
     if (!snapShot.exists) {
-        const { displayName, email } = userAuth;
+        const { displayName, email, photoURL } = userAuth;
         const createdAt = new Date();
         try {
             await userRef.set({
+                photoURL,
                 displayName,
                 email,
                 createdAt,
@@ -37,6 +39,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const firestorage = firebase.storage();
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });

@@ -11,17 +11,19 @@ const PageLayout = props => {
         <>
             <StyledPageLayout>
                 <StyledPageNavigation>
-                    <GlobalNavigation user={user} />
-                    {!!user && (
-                        <NormalButton
-                            onClick={() => {
-                                auth.signOut();
-                            }}
-                            size="small"
-                        >
-                            ログアウト
-                        </NormalButton>
-                    )}
+                    <StyledPageNavigationContainer>
+                        <GlobalNavigation user={user} />
+                        {!!user && (
+                            <NormalButton
+                                onClick={() => {
+                                    auth.signOut();
+                                }}
+                                size="small"
+                            >
+                                ログアウト
+                            </NormalButton>
+                        )}
+                    </StyledPageNavigationContainer>
                 </StyledPageNavigation>
                 <StyledPageContent>{children}</StyledPageContent>
             </StyledPageLayout>
@@ -44,10 +46,20 @@ const StyledPageNavigation = styled.div`
     && {
         min-width: 18rem;
         padding-top: 1rem;
+        position: relative;
         button {
+            width: 100%;
             margin-top: 1rem;
-            margin-left: 3rem;
+            /* MEMO(aida) max-widthは必要に応じて調整　*/
+            max-width: 16rem;
         }
+    }
+`;
+
+const StyledPageNavigationContainer = styled.div`
+    && {
+        position: sticky;
+        top: 1rem;
     }
 `;
 

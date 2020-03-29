@@ -26,7 +26,8 @@ const activeStyle = props => {
 };
 const StyledLink = styled(Link)`
     && {
-        color: #042333;
+        color: #ececec;
+        /* color: #042333; */
         text-decoration: none;
         ${props => activeStyle(props)}
     }

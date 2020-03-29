@@ -13,7 +13,10 @@ const GlobalStyle = createGlobalStyle`
     }
     html{
         font-size: 62.5%;
-        background: #E5E5E5;
+        /* background: #150E2E; */
+        /* background: #2d2742; */
+        background: #1e364d;
+        color: #ECECEC;
     }
     .story-wrapper {
         padding: 2rem;

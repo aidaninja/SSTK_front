@@ -14,7 +14,6 @@ const TextInput = props => {
             break;
         default:
     }
-
     return (
         <StyledTextInputBlock>
             <Component
@@ -45,6 +44,10 @@ const StyledTextInput = styled.input`
         font-size: inherit;
         color: inherit;
         height: 100%;
+
+        /* background: #2d2742; */
+        background: #1e364d;
+        color: #ececec;
     }
 `;
 
@@ -59,6 +62,9 @@ const StyledTextarea = styled.textarea`
         color: inherit;
         height: 100%;
         resize: none;
+        /* background: #2d2742; */
+        background: #1e364d;
+        color: #ececec;
     }
 `;
 const StyledTextInputBlock = styled.div`

@@ -27,7 +27,8 @@ const FormBox = props => {
 
 const StyledForm = styled.div`
     && {
-        background: #2d2742;
+        /* background: #2d2742; */
+        background: #1e364d;
         padding: 4rem 6rem;
         /* box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2),
             0 0.6rem 0.6rem rgba(0, 0, 0, 0.24); */

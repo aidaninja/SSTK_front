@@ -20,8 +20,10 @@ const themePicker = props => {
     switch (props.theme) {
         case "default":
             return css`
-                background: #fff;
-                border-color: #3722d3;
+                /* background: #2d2742; */
+                background: #1e364d;
+                /* background: #0e2339; */
+                border-color: #1e364d;
             `;
         default:
     }
@@ -31,11 +33,11 @@ const sizePicker = props => {
     switch (props.size) {
         case "small":
             return css`
-                border-width: 0.3rem;
+                border-width: 0.1rem;
             `;
         case "medium":
             return css`
-                border-width: 0.4rem;
+                border-width: 0.3rem;
             `;
         case "large":
             return css`
@@ -51,6 +53,7 @@ const StyledBox = styled.div`
             0 0.6rem 0.6rem rgba(0, 0, 0, 0.24); */
         border: 0.3rem solid;
         border-radius: 0.5rem;
+        overflow: hidden;
         ${props => sizePicker(props)}
         ${props => themePicker(props)}
     }

@@ -20,7 +20,9 @@ const GlobalStyle = createGlobalStyle`
     }
     html{
         font-size: 62.5%;
-        background: #150E2E;
+        background: #0E2339;
+        /* background: #150E2E; */
+        /*background: #1E364D; */
         color: #ECECEC;
         overflow-y: scroll;
     }

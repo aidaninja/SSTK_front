@@ -11,7 +11,7 @@ const Home = props => {
 
     useEffect(() => {
         const fetchData = () => {
-            const postListRef = firestore.collection("posts");
+            const postListRef = firestore.collection("posts").orderBy("postedOn", "desc");
             const unsubscribe = postListRef.onSnapshot(snapshot => {
                 const fetchedList = map(snapshot.docs, doc => {
                     const id = doc.id;
@@ -35,7 +35,7 @@ const Home = props => {
     return (
         <>
             <PageLayout user={user}>
-                <PageHeader>HOME</PageHeader>
+                <PageHeader>Home</PageHeader>
                 {/* TODO(aida)リストがない場合は新規投稿を促す表示をする */}
                 {/* TODO(aida)ローディング中はローディング表示 */}
                 <PostItemList postItems={postItems} />

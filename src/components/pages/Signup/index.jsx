@@ -44,7 +44,7 @@ const Signup = props => {
     return (
         <TopLayout>
             <SignupForm
-                style={{ margin: "5rem auto 0" }}
+                style={{ margin: "5rem auto" }}
                 {...formEventHandler}
             />
         </TopLayout>

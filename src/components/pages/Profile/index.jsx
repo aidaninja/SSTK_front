@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { map } from "lodash";
 import { withRouter } from "react-router-dom";
 import PageLayout from "components/templates/PageLayout";
 import PageHeader from "components/organisms/PageHeader";
 import ProfileBox from "components/organisms/ProfileBox";
 import EditProfileForm from "components/organisms/EditProfileForm";
+import PostItemList from "components/organisms/PostItemList";
 import { firestore, firestorage } from "utils/firebase/firebase.utils";
 
 //TODO(aida) プロフィール画像変更の処理は見直しが必要。現状選択するたびにアップロードしているので、これは良くない。
@@ -120,6 +123,34 @@ const Profile = props => {
         updateEditMode(false);
     };
 
+    const [postItems, updatePostItems] = useState([]);
+
+    useEffect(() => {
+        const fetchData = () => {
+            const postListRef = firestore.collection("posts").orderBy("postedOn", "desc");
+            const unsubscribe = postListRef.onSnapshot(snapshot => {
+                const fetchedList = map(snapshot.docs, doc => {
+                    const id = doc.id;
+                    const { title, postedOn, user } = doc.data();
+                    if(userRef.id === user.id) return { id, title, postedOn, user };
+                });
+                const userPostList = fetchedList.filter(list => {
+                    return list !== undefined;
+                });
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === "added") {
+                        updatePostItems([...userPostList]);
+                    }
+                });
+            });
+            return unsubscribe;
+        };
+        const unsubscribe = fetchData();
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
     return (
         <PageLayout user={user}>
             <PageHeader>{isEditMode ? "Edit Profile" : "Profile"}</PageHeader>
@@ -134,14 +165,28 @@ const Profile = props => {
                     />
                 </div>
             ) : (
-                <ProfileBox
-                    user={pageUser}
-                    isOwner={isOwner}
-                    onEditProfile={onChangeEditMode}
-                />
+                <div>
+                    <ProfileBox
+                        user={pageUser}
+                        isOwner={isOwner}
+                        onEditProfile={onChangeEditMode}
+                    />
+                    <StyledPostsBox>
+                        <PageHeader>Posts</PageHeader>
+                        <StyledPostsBox>
+                            <PostItemList postItems={postItems} />
+                        </StyledPostsBox>
+                    </StyledPostsBox>
+                </div>
             )}
         </PageLayout>
     );
 };
 
 export default withRouter(Profile);
+
+const StyledPostsBox = styled.div`
+    && {
+        margin-top: 3rem;
+    }
+`;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import { auth, createUserProfileDocument } from "utils/firebase/firebase.utils";
@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
     html{
+        font-family: 'Monaco', '游ゴシック体', 'YuGothic', sans-serif;
         font-size: 62.5%;
         background: #0E2339;
         /* background: #150E2E; */

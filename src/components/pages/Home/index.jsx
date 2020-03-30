@@ -11,7 +11,7 @@ const Home = props => {
 
     useEffect(() => {
         const fetchData = () => {
-            const postListRef = firestore.collection("posts");
+            const postListRef = firestore.collection("posts").orderBy("postedOn", "desc");
             const unsubscribe = postListRef.onSnapshot(snapshot => {
                 const fetchedList = map(snapshot.docs, doc => {
                     const id = doc.id;

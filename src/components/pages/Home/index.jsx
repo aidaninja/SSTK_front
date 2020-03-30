@@ -35,7 +35,7 @@ const Home = props => {
     return (
         <>
             <PageLayout user={user}>
-                <PageHeader>HOME</PageHeader>
+                <PageHeader>Home</PageHeader>
                 {/* TODO(aida)リストがない場合は新規投稿を促す表示をする */}
                 {/* TODO(aida)ローディング中はローディング表示 */}
                 <PostItemList postItems={postItems} />

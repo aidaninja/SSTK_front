@@ -172,7 +172,7 @@ const Profile = props => {
                         onEditProfile={onChangeEditMode}
                     />
                     <StyledPostsBox>
-                        <PageHeader>POSTS</PageHeader>
+                        <PageHeader>Posts</PageHeader>
                         <StyledPostsBox>
                             <PostItemList postItems={postItems} />
                         </StyledPostsBox>

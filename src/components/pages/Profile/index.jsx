@@ -132,10 +132,10 @@ const Profile = props => {
                 const fetchedList = map(snapshot.docs, doc => {
                     const id = doc.id;
                     const { title, postedOn, user } = doc.data();
-                    if(userRef.id == user.id) return { id, title, postedOn, user };
+                    if(userRef.id === user.id) return { id, title, postedOn, user };
                 });
                 const userPostList = fetchedList.filter(list => {
-                    return list != undefined;
+                    return list !== undefined;
                 });
                 snapshot.docChanges().forEach(change => {
                     if (change.type === "added") {

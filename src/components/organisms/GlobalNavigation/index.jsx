@@ -76,8 +76,9 @@ const StyledGlobalNavigation = styled(NormalBox)`
 //FIXME(aida) pタグで拡張するかはレビューが必要
 const StyldGlobalNavigationHeader = styled.p`
     && {
+        font-family: "logo";
         text-align: center;
-        font-size: 1.4rem;
+        font-size: 1.8rem;
         font-weight: bold;
     }
 `;

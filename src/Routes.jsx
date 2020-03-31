@@ -10,8 +10,13 @@ import CreatePost from "components/pages/CreatePost";
 import Post from "components/pages/Post";
 import Profile from "components/pages/Profile";
 import { GlobalStateContext } from "contexts";
+import logo from "font/851H-kktt_004.ttf";
 
 const GlobalStyle = createGlobalStyle`
+    @font-face {
+        font-family: logo;
+        src: url(${logo});
+    }
     ${reset}
     *,*:before,*:after{
         margin: 0;

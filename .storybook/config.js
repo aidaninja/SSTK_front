@@ -15,8 +15,9 @@ const GlobalStyle = createGlobalStyle`
         font-size: 62.5%;
         /* background: #150E2E; */
         /* background: #2d2742; */
-        background: #1e364d;
+        background: #0E2339;
         color: #ECECEC;
+        font-family: Monaco;
     }
     .story-wrapper {
         padding: 2rem;

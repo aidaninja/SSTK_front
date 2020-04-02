@@ -45,7 +45,6 @@ const StyledPageLayout = styled.div`
 const StyledPageNavigation = styled.div`
     && {
         min-width: 18rem;
-        padding-top: 1rem;
         position: relative;
         button {
             width: 100%;

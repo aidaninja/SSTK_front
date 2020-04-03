@@ -6,12 +6,13 @@ import PageHeader from "components/organisms/PageHeader";
 import PostOverview from "components/organisms/PostOverview";
 import { firestore } from "utils/firebase/firebase.utils";
 import CommentSection from "components/organisms/CommentSection";
+import { CenteredLoader } from "components/organisms/Loader";
 
 const Post = props => {
     const { user, match } = props;
     const { postId } = match.params;
-    const [post, updatePost] = useState({});
-    const [commentItems, updateCommentItems] = useState([]);
+    const [post, updatePost] = useState(null);
+    const [commentItems, updateCommentItems] = useState(null);
     const [comment, updateComment] = useState("");
     const postRef = firestore.doc(`posts/${postId}`);
     useEffect(() => {
@@ -76,12 +77,21 @@ const Post = props => {
     return (
         // TODO(aida) loading中の表示を追加する
         <PageLayout user={user}>
-            <PageHeader>{post.title}</PageHeader>
-            <PostOverview {...post} />
-            <div>
-                <StyledLabel>コメント</StyledLabel>
-                <CommentSection {...commentProps} />
-            </div>
+            {post ? (
+                <>
+                    <PageHeader>{post.title}</PageHeader>
+                    <PostOverview {...post} />
+                    <div>
+                        <StyledLabel>コメント</StyledLabel>
+                        <CommentSection {...commentProps} />
+                    </div>
+                </>
+            ) : (
+                <>
+                    <PageHeader>-----</PageHeader>
+                    <CenteredLoader />
+                </>
+            )}
         </PageLayout>
     );
 };

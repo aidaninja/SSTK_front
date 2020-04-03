@@ -57,8 +57,7 @@ const StyledPageNavigation = styled.div`
 
 const StyledPageNavigationContainer = styled.div`
     && {
-        position: sticky;
-        top: 1rem;
+        position: fixed;
     }
 `;
 

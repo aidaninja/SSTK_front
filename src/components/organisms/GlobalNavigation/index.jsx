@@ -17,7 +17,7 @@ const GlobalNavigation = props => {
             type: ""
         },
         {
-            name: "Post",
+            name: "New",
             path: "/post",
             image: { src: get(icon, "dark.assignment", ""), alt: "post" },
             type: ""

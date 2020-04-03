@@ -40,6 +40,7 @@ const Home = props => {
             <PageLayout user={user}>
                 <PageHeader>Home</PageHeader>
                 {/* TODO(aida)リストがない場合は新規投稿を促す表示をする */}
+                {/*TODO(aida) Loader表示の切り替えにaddOnCompleteListener?を使う */}
                 {postItems ? (
                     <PostItemList postItems={postItems} />
                 ) : (

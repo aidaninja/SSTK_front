@@ -87,7 +87,10 @@ const Post = props => {
                     </div>
                 </>
             ) : (
-                <CenteredLoader />
+                <>
+                    <PageHeader>-----</PageHeader>
+                    <CenteredLoader />
+                </>
             )}
         </PageLayout>
     );

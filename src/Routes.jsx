@@ -7,6 +7,7 @@ import Signup from "components/pages/Signup";
 import Login from "components/pages/Login";
 import Home from "components/pages/Home";
 import CreatePost from "components/pages/CreatePost";
+import EditPost from "components/pages/EditPost";
 import Post from "components/pages/Post";
 import Profile from "components/pages/Profile";
 import { GlobalStateContext } from "contexts";
@@ -74,6 +75,9 @@ const Routes = () => {
                     </Route>
                     <Route exact path="/post">
                         <CreatePost user={authUser} />
+                    </Route>
+                    <Route path="/edit/:postId">
+                        <EditPost user={authUser} />
                     </Route>
                     <Route path="/post/:postId">
                         <Post user={authUser} />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { map } from "lodash";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import PageLayout from "components/templates/PageLayout";
 import PageHeader from "components/organisms/PageHeader";
 import ProfileBox from "components/organisms/ProfileBox";
@@ -199,6 +199,7 @@ const Profile = props => {
                             <CenteredLoader />
                         )}
                     </StyledPostsBox>
+                    <StyledCreatePostLink to='/post'>＋</StyledCreatePostLink>
                 </div>
             )}
         </PageLayout>
@@ -210,6 +211,29 @@ export default withRouter(Profile);
 const StyledPostsBox = styled.div`
     && {
         margin-top: 3rem;
+    }
+`;
+
+const StyledCreatePostLink = styled(Link)`
+    && {
+        position: fixed;
+        // left: calc(50% + 49rem);
+        right: 10%;
+        bottom: 10%;
+        display: inline-block;
+        padding: 1rem;
+        font-size: 3.6rem;
+        line-height: 1;
+        border: 2px solid #FFFFFF;
+        border-radius: 100%;
+        color: #FFFFFF;
+        background-color: #3722d3;
+        cursor: pointer;
+        transition: background-color .2s;
+
+        &:hover {
+            background-color: #A59FD4;
+        }
     }
 `;
 

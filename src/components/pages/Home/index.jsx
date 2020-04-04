@@ -5,6 +5,8 @@ import PageHeader from "components/organisms/PageHeader";
 import PostItemList from "components/organisms/PostItemList";
 import { firestore } from "utils/firebase/firebase.utils";
 import { CenteredLoader } from "components/organisms/Loader";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Home = props => {
     const { user } = props;
@@ -46,9 +48,33 @@ const Home = props => {
                 ) : (
                     <CenteredLoader />
                 )}
+                <StyledCreatePostLink to='/post'>＋</StyledCreatePostLink>
             </PageLayout>
         </>
     );
 };
 
 export default Home;
+
+const StyledCreatePostLink = styled(Link)`
+    && {
+        position: fixed;
+        // left: calc(50% + 49rem);
+        right: 10%;
+        bottom: 10%;
+        display: inline-block;
+        padding: 1rem;
+        font-size: 3.6rem;
+        line-height: 1;
+        border: 2px solid #FFFFFF;
+        border-radius: 100%;
+        color: #FFFFFF;
+        background-color: #3722d3;
+        cursor: pointer;
+        transition: background-color .2s;
+
+        &:hover {
+            background-color: #A59FD4;
+        }
+    }
+`;

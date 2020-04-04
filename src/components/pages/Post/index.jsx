@@ -14,6 +14,7 @@ const Post = props => {
     const [post, updatePost] = useState(null);
     const [commentItems, updateCommentItems] = useState(null);
     const [comment, updateComment] = useState("");
+    const [isError, setIsError] = useState(false);
     const postRef = firestore.doc(`posts/${postId}`);
     useEffect(() => {
         //TODO(aida) utils/firebase/firebase.utilsに切り分ける
@@ -37,8 +38,10 @@ const Post = props => {
         e.preventDefault();
         if (!comment) {
             console.log("[comment] no comment");
+            setIsError(true);
             return;
         }
+        setIsError(false);
         const snapshot = await postRef.get();
         const currentPostDocument = snapshot.data();
         const { commentItems = [] } = currentPostDocument;
@@ -71,7 +74,8 @@ const Post = props => {
             placeholder: "コメントを入力してください...",
             onChange: onComment,
             value: comment
-        }
+        },
+        isError: isError
     };
 
     return (

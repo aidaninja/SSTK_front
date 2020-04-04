@@ -9,11 +9,9 @@ const CommentInput = props => {
         <StyledCommentInput>
             <TextInputBox input={input} textarea={true} />
             <StyledButtonBlock>
-                {isError &&
-                <StyledErrorText>
-                    コメントを入力して下さい
-                </StyledErrorText>
-                }
+                {isError && (
+                    <StyledErrorText>コメントが未入力です😡</StyledErrorText>
+                )}
                 <StyledCommentButton size="small" onClick={onClick}>
                     コメント
                 </StyledCommentButton>
@@ -49,6 +47,6 @@ const StyledErrorText = styled.p`
     && {
         font-size: 1.4rem;
         text-align: center;
-        color: #FF9393;
+        color: #ff9393;
     }
 `;

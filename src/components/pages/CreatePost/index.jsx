@@ -137,9 +137,7 @@ const CreatePost = props => {
                         </NormalButton>
                     </StyledButtonWrapper>
                     {isError && (
-                        <StyledErrorText>
-                            全ての項目を入力して下さい
-                        </StyledErrorText>
+                        <StyledErrorText>項目が未入力です😡</StyledErrorText>
                     )}
                 </PageLayout>
             )}

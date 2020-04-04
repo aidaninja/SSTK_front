@@ -10,6 +10,7 @@ import PostItemList from "components/organisms/PostItemList";
 import { firestore, firestorage } from "utils/firebase/firebase.utils";
 import { CenteredLoader } from "components/organisms/Loader";
 import MessageBox from "components/organisms/MessageBox";
+import ToCreatePostLink from "components/organisms/ToCreatePostLink";
 
 //TODO(aida) プロフィール画像変更の処理は見直しが必要。現状選択するたびにアップロードしているので、これは良くない。
 
@@ -58,9 +59,9 @@ const Profile = props => {
             const unsubscribe = postListRef.onSnapshot(snapshot => {
                 const fetchedList = map(snapshot.docs, doc => {
                     const id = doc.id;
-                    const { title, postedOn, user } = doc.data();
-                    if (userRef.id === user.id)
-                        return { id, title, postedOn, user };
+                    const { title, postedOn, user, isDeleted } = doc.data();
+                    if (userRef.id === user.id && !isDeleted)
+                        return { id, title, postedOn, user, isDeleted };
                 });
                 const userPostList = fetchedList.filter(list => {
                     return list !== undefined;
@@ -199,7 +200,7 @@ const Profile = props => {
                             <CenteredLoader />
                         )}
                     </StyledPostsBox>
-                    <StyledCreatePostLink to='/post'>＋</StyledCreatePostLink>
+                    <ToCreatePostLink />
                 </div>
             )}
         </PageLayout>
@@ -211,29 +212,6 @@ export default withRouter(Profile);
 const StyledPostsBox = styled.div`
     && {
         margin-top: 3rem;
-    }
-`;
-
-const StyledCreatePostLink = styled(Link)`
-    && {
-        position: fixed;
-        // left: calc(50% + 49rem);
-        right: 10%;
-        bottom: 10%;
-        display: inline-block;
-        padding: 1rem;
-        font-size: 3.6rem;
-        line-height: 1;
-        border: 2px solid #FFFFFF;
-        border-radius: 100%;
-        color: #FFFFFF;
-        background-color: #3722d3;
-        cursor: pointer;
-        transition: background-color .2s;
-
-        &:hover {
-            background-color: #A59FD4;
-        }
     }
 `;
 

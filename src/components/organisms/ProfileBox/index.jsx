@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { get } from "lodash";
 import { NormalBox } from "components/atoms/Box";
 import { RoundImage } from "components/atoms/Imgs";
-import { AlertButton } from "components/atoms/Buttons";
+import { WarningButton } from "components/atoms/Buttons";
 
 const ProfileBox = props => {
     const { user, onEditProfile, isOwner, ...restProps } = props;
@@ -14,7 +14,7 @@ const ProfileBox = props => {
                 <StyledUserName>{get(user, "displayName")}</StyledUserName>
                 {isOwner ? (
                     <StyledEditButton size={"small"} onClick={onEditProfile}>
-                        EDIT
+                        編集する
                     </StyledEditButton>
                 ) : null}
                 <StyledUserDetail>{get(user, "intro")}</StyledUserDetail>
@@ -57,7 +57,7 @@ const StyledUserName = styled.h1`
     }
 `;
 
-const StyledEditButton = styled(AlertButton)`
+const StyledEditButton = styled(WarningButton)`
     && {
         margin-top: auto;
         width: 10rem;

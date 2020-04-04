@@ -58,7 +58,7 @@ const colorPicker = props => {
         case "default":
             return css`
                 color: #fff;
-                background: #3722d3;
+                background: #4799eb;
             `;
         case "alert":
             return css`
@@ -79,6 +79,11 @@ const StyledButton = styled.button`
         appearance: none;
         cursor: pointer;
         border-radius: 0.5rem;
+        border: none;
+        transition: opacity ease 0.2s;
+        :hover {
+            opacity: 0.8;
+        }
         ${props => sizePicker(props)}
         ${props => colorPicker(props)}
     }

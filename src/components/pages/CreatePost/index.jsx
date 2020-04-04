@@ -11,6 +11,7 @@ import { firestore } from "utils/firebase/firebase.utils";
 const CreatePost = props => {
     const { user, ...restProps } = props;
     const [isOnPreview, switchPreview] = useState(false);
+    const [isError, setIsError] = useState(false);
     const [postInput, updatePostInput] = useState({
         title: "",
         overview: "",
@@ -33,8 +34,10 @@ const CreatePost = props => {
         if (!title || !overview || !want || !current) {
             console.log(postInput);
             console.log("[create post] some field is empty ...");
+            setIsError(true);
             return;
         }
+        setIsError(false);
 
         const postsRef = firestore.collection("posts");
         const postedOn = new Date();
@@ -135,6 +138,11 @@ const CreatePost = props => {
                             投稿する
                         </NormalButton>
                     </StyledButtonWrapper>
+                    {isError &&
+                    <StyledErrorText>
+                        全ての項目を入力して下さい
+                    </StyledErrorText>
+                    }
                 </PageLayout>
             )}
         </>
@@ -162,5 +170,14 @@ const StyledButtonWrapper = styled.div`
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
+    }
+`;
+
+const StyledErrorText = styled.p`
+    && {
+        margin: 3rem auto 0;
+        font-size: 1.6rem;
+        text-align: center;
+        color: #FF9393;
     }
 `;

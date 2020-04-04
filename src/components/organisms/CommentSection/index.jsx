@@ -4,11 +4,11 @@ import CommentItemList from "components/organisms/CommentItemList";
 import CommentInput from "components/organisms/CommentInput";
 
 const CommentSection = props => {
-    const { inputProps, commentItems, ...options } = props;
+    const { onSubmitComment, input, commentItems, isError } = props;
     return (
-        <StyledCommentSection {...options}>
+        <StyledCommentSection>
             <CommentItemList commentItems={commentItems} />
-            <CommentInput {...inputProps} />
+            <CommentInput onClick={onSubmitComment} input={input} isError={isError} />
         </StyledCommentSection>
     );
 };

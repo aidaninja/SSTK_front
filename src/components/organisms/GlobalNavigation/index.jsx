@@ -17,18 +17,18 @@ const GlobalNavigation = props => {
             type: ""
         },
         {
-            name: "Post",
+            name: "New",
             path: "/post",
             image: { src: get(icon, "dark.assignment", ""), alt: "post" },
             type: ""
         },
         {
-            name: "profile",
-            path: `/${get(user, "name", "")}`,
+            name: "Profile",
+            path: `/profile/${get(user, "id", "")}`,
             image: {
                 src: get(
                     user,
-                    "profile",
+                    "photoURL",
                     "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
                 ),
                 alt: "profile"
@@ -45,7 +45,7 @@ const GlobalNavigation = props => {
                 {map(navigationItems, (item, i) => {
                     const { name, path, image, type } = item;
                     return (
-                        <StyledGlobalNavigationItem>
+                        <StyledGlobalNavigationItem key={`${name}_${i}`}>
                             <Lnk to={path}>
                                 <ImageText
                                     size="large"
@@ -76,10 +76,10 @@ const StyledGlobalNavigation = styled(NormalBox)`
 //FIXME(aida) pタグで拡張するかはレビューが必要
 const StyldGlobalNavigationHeader = styled.p`
     && {
+        font-family: "logo";
         text-align: center;
-        font-size: 1.4rem;
+        font-size: 1.8rem;
         font-weight: bold;
-        color: #042333;
     }
 `;
 

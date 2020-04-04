@@ -6,15 +6,19 @@ const FormBox = props => {
     const { inputs, buttons, name, ...options } = props;
     return (
         <StyledForm {...options}>
-            <StyledFormName>{name}</StyledFormName>
+            {name ? <StyledFormName>{name}</StyledFormName> : null}
             <StyledFromInputWrapper>
-                {map(inputs, input => (
-                    <StyledFromInput>{input}</StyledFromInput>
+                {map(inputs, (input, i) => (
+                    <StyledFromInput key={`input_${i}`}>
+                        {input}
+                    </StyledFromInput>
                 ))}
             </StyledFromInputWrapper>
             <StyledFormButtonWrapper>
-                {map(buttons, button => (
-                    <StyledFormButton>{button}</StyledFormButton>
+                {map(buttons, (button, i) => (
+                    <StyledFormButton key={`button_${i}`}>
+                        {button}
+                    </StyledFormButton>
                 ))}
             </StyledFormButtonWrapper>
         </StyledForm>
@@ -23,10 +27,11 @@ const FormBox = props => {
 
 const StyledForm = styled.div`
     && {
-        background: #ffffff;
+        /* background: #2d2742; */
+        background: #1e364d;
         padding: 4rem 6rem;
-        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2),
-            0 0.6rem 0.6rem rgba(0, 0, 0, 0.24);
+        /* box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2),
+            0 0.6rem 0.6rem rgba(0, 0, 0, 0.24); */
         max-width: 38rem;
     }
 `;
@@ -40,20 +45,26 @@ const StyledFormName = styled.p`
 
 const StyledFromInputWrapper = styled.div`
     && {
-        margin-top: 6rem;
+        :not(:first-child) {
+            margin-top: 6rem;
+        }
     }
 `;
 
 const StyledFromInput = styled.div`
     && {
-        margin-top: 4rem;
+        :not(:first-child) {
+            margin-top: 4rem;
+        }
     }
 `;
 
 const StyledFormButtonWrapper = styled.div`
     && {
         margin-top: 6rem;
-        text-align: center;
+        /* text-align: center; */
+        display: flex;
+        justify-content: space-evenly;
     }
 `;
 

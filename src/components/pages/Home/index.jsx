@@ -1,104 +1,57 @@
-import React from "react";
-import styled from "styled-components";
-import GlobalNavigation from "components/organisms/GlobalNavigation";
+import React, { useEffect, useState } from "react";
+import { map } from "lodash";
+import PageLayout from "components/templates/PageLayout";
 import PageHeader from "components/organisms/PageHeader";
 import PostItemList from "components/organisms/PostItemList";
-import { auth } from "utils/firebase/firebase.utils";
-
-//TODO(aida) 仮の表示用のため実装が完了時、削除する。
-const mockPostsProps = {
-    postItems: [
-        {
-            title: "Reactのアニメーション分からないよー",
-            tags: [{ name: "React" }, { name: "CSS" }],
-            postedOn: "02/17/2020",
-            user: {
-                name: "Jun Aida",
-                src:
-                    "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
-            },
-            status: "🔥",
-            id: 1
-        },
-        {
-            title: "Reduxの使い方がわかりません",
-            tags: [{ name: "React" }],
-            postedOn: "02/17/2020",
-            user: {
-                name: "Yuki Inoue",
-                src:
-                    "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
-            },
-            status: "🔥",
-            id: 2
-        },
-        {
-            title: "中央寄せできない",
-            tags: [{ name: "HTML" }, { name: "CSS" }],
-            postedOn: "02/17/2020",
-            user: {
-                name: "Jun Aida",
-                src:
-                    "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
-            },
-            status: "😆",
-            id: 3
-        }
-    ]
-};
+import { firestore } from "utils/firebase/firebase.utils";
+import { CenteredLoader } from "components/organisms/Loader";
+import ToCreatePostLink from "components/organisms/ToCreatePostLink";
 
 const Home = props => {
     const { user } = props;
+    const [postItems, updatePostItems] = useState(null);
+
+    useEffect(() => {
+        const fetchData = () => {
+            const postListRef = firestore
+                .collection("posts")
+                .orderBy("postedOn", "desc");
+            const unsubscribe = postListRef.onSnapshot(snapshot => {
+                const fetchedList = map(snapshot.docs, doc => {
+                    const id = doc.id;
+                    const { title, postedOn, user, isDeleted } = doc.data();
+                    if (!isDeleted) return { id, title, postedOn, user };
+                });
+                const activeList = fetchedList.filter(list => !!list);
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === "added") {
+                        updatePostItems([...activeList]);
+                    }
+                });
+            });
+            return unsubscribe;
+        };
+        const unsubscribe = fetchData();
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
     return (
         <>
-            <StyledPageLayout>
-                <StyledPageNavigation>
-                    <GlobalNavigation />
-                    {!!user && (
-                        <button
-                            onClick={() => {
-                                auth.signOut();
-                            }}
-                        >
-                            ログアウト
-                        </button>
-                    )}
-                </StyledPageNavigation>
-                <StyledPageContent>
-                    <PageHeader>HOME</PageHeader>
-                    {/* TODO(aida)リストがない場合は新規投稿を促す表示をする */}
-                    {/* TODO(aida)ローディング中はローディング表示 */}
-                    <PostItemList {...mockPostsProps} />
-                </StyledPageContent>
-            </StyledPageLayout>
+            <PageLayout user={user}>
+                <PageHeader>Home</PageHeader>
+                {/* TODO(aida)リストがない場合は新規投稿を促す表示をする */}
+                {/*TODO(aida) Loader表示の切り替えにaddOnCompleteListener?を使う */}
+                {postItems ? (
+                    <PostItemList postItems={postItems} />
+                ) : (
+                    <CenteredLoader />
+                )}
+                <ToCreatePostLink />
+            </PageLayout>
         </>
     );
 };
 
 export default Home;
-
-//TODO(aida)PageLayoutk系はどっかにまとめる
-const StyledPageLayout = styled.div`
-    && {
-        display: flex;
-        max-width: 98rem;
-        margin: 0 auto;
-        padding: 2rem 0;
-    }
-`;
-
-const StyledPageNavigation = styled.div`
-    && {
-        min-width: 18rem;
-        padding-top: 1rem;
-    }
-`;
-
-const StyledPageContent = styled.div`
-    && {
-        width: 100%;
-        > *:not(:first-child) {
-            margin-top: 3rem;
-        }
-    }
-`;

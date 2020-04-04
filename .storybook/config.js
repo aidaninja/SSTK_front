@@ -13,7 +13,11 @@ const GlobalStyle = createGlobalStyle`
     }
     html{
         font-size: 62.5%;
-        background: #E5E5E5;
+        /* background: #150E2E; */
+        /* background: #2d2742; */
+        background: #0E2339;
+        color: #ECECEC;
+        font-family: Monaco;
     }
     .story-wrapper {
         padding: 2rem;

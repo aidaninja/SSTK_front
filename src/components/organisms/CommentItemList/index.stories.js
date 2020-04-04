@@ -8,7 +8,7 @@ const mockProps = {
             id: 0,
             user: {
                 name: "Yuki Inoue",
-                src:
+                photoURL:
                     "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
             },
             comment:
@@ -18,7 +18,7 @@ const mockProps = {
             id: 0,
             user: {
                 name: "Jun Aida",
-                src:
+                photoURL:
                     "https://emojipedia.org//static/img/logo/emojipedia-logo-140.0d779a8a903c.png"
             },
             comment: "なるほどね！ありがとうございます！"

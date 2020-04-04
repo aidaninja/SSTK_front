@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { map } from "lodash";
 
 const FormBox = props => {
-    const { inputs, buttons, buttons2, name, ...options } = props;
+    const { inputs, buttons, Footer = null, name, ...options } = props;
+
     return (
         <StyledForm {...options}>
             {name ? <StyledFormName>{name}</StyledFormName> : null}
@@ -21,13 +22,11 @@ const FormBox = props => {
                     </StyledFormButton>
                 ))}
             </StyledFormButtonWrapper>
-            <StyledFormButton2Wrapper>
-                {map(buttons2, (button, i) => (
-                    <StyledFormButton key={`button2_${i}`}>
-                        {button}
-                    </StyledFormButton>
-                ))}
-            </StyledFormButton2Wrapper>
+            {Footer ? (
+                <StyledFooter>
+                    <Footer />
+                </StyledFooter>
+            ) : null}
         </StyledForm>
     );
 };
@@ -36,7 +35,7 @@ const StyledForm = styled.div`
     && {
         /* background: #2d2742; */
         background: #1e364d;
-        padding: 4rem 6rem;
+        padding: 4rem;
         /* box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2),
             0 0.6rem 0.6rem rgba(0, 0, 0, 0.24); */
         max-width: 38rem;
@@ -53,7 +52,7 @@ const StyledFormName = styled.p`
 const StyledFromInputWrapper = styled.div`
     && {
         :not(:first-child) {
-            margin-top: 6rem;
+            margin-top: 4rem;
         }
     }
 `;
@@ -61,26 +60,22 @@ const StyledFromInputWrapper = styled.div`
 const StyledFromInput = styled.div`
     && {
         :not(:first-child) {
-            margin-top: 4rem;
+            margin-top: 2rem;
         }
     }
 `;
 
 const StyledFormButtonWrapper = styled.div`
     && {
-        margin-top: 6rem;
-        /* text-align: center; */
+        margin-top: 4rem;
         display: flex;
         justify-content: space-evenly;
     }
 `;
 
-const StyledFormButton2Wrapper = styled.div`
+const StyledFooter = styled.div`
     && {
-        margin-top: 2rem;
-        /* text-align: center; */
-        display: flex;
-        justify-content: space-evenly;
+        margin-top: 1.6rem;
     }
 `;
 

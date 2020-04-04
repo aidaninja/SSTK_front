@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { map } from "lodash";
 
 const FormBox = props => {
-    const { inputs, buttons, name, ...options } = props;
+    const { inputs, buttons, buttons2, name, ...options } = props;
     return (
         <StyledForm {...options}>
             {name ? <StyledFormName>{name}</StyledFormName> : null}
@@ -21,6 +21,13 @@ const FormBox = props => {
                     </StyledFormButton>
                 ))}
             </StyledFormButtonWrapper>
+            <StyledFormButton2Wrapper>
+                {map(buttons2, (button, i) => (
+                    <StyledFormButton key={`button2_${i}`}>
+                        {button}
+                    </StyledFormButton>
+                ))}
+            </StyledFormButton2Wrapper>
         </StyledForm>
     );
 };
@@ -62,6 +69,15 @@ const StyledFromInput = styled.div`
 const StyledFormButtonWrapper = styled.div`
     && {
         margin-top: 6rem;
+        /* text-align: center; */
+        display: flex;
+        justify-content: space-evenly;
+    }
+`;
+
+const StyledFormButton2Wrapper = styled.div`
+    && {
+        margin-top: 2rem;
         /* text-align: center; */
         display: flex;
         justify-content: space-evenly;

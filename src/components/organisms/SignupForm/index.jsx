@@ -6,9 +6,11 @@ import { NormalButton } from "components/atoms/Buttons";
 //TODO(aida)パスワードを再入力までやるかは要検討
 const SignupForm = props => {
     const {
+        onUserNameEnter,
         onUserIdEnter,
         onUserPasswordEnter,
         onButtonClick,
+        signUpWithGoogle,
         ...options
     } = props;
 
@@ -17,6 +19,11 @@ const SignupForm = props => {
         buttons: [
             <NormalButton onClick={onButtonClick} size="small">
                 サインアップ
+            </NormalButton>
+        ],
+        buttons2: [
+            <NormalButton onClick={signUpWithGoogle} size="small">
+                Googleでサインアップ
             </NormalButton>
         ],
         inputs: [

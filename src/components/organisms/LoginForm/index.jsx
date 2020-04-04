@@ -2,6 +2,7 @@ import React from "react";
 import FormBox from "components/molecules/FormBox";
 import { NormalInput, PasswordInput } from "components/atoms/Inputs";
 import { NormalButton } from "components/atoms/Buttons";
+import { Link } from "react-router-dom";
 
 const LoginForm = props => {
     const {
@@ -20,6 +21,13 @@ const LoginForm = props => {
             <NormalButton onClick={loginWithGoogle} size="small">
                 Googleでログイン
             </NormalButton>
+        ],
+        buttons2: [
+            <Link to="/signup">
+                <NormalButton size="small">
+                    サインアップ
+                </NormalButton>
+            </Link>
         ],
         inputs: [
             <NormalInput

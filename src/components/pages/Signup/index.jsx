@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import SignupForm from "components/organisms/SignupForm";
 import TopLayout from "components/templates/TopLayout";
-import { auth, createUserProfileDocument, loginWithGoogle as signUpWithGoogle } from "utils/firebase/firebase.utils";
+import { auth, createUserProfileDocument, loginWithGoogle } from "utils/firebase/firebase.utils";
 
 const Signup = props => {
     const [userInput, updateUserInput] = useState({
@@ -38,6 +38,18 @@ const Signup = props => {
             console.error("error creating user", error);
         }
     };
+
+    const signUpWithGoogle = async () => {
+        try {
+            await loginWithGoogle();
+            history.push("/");
+            // TODO(inoue): こっちだとプロファイルに遷移、でもgoogleの時は名前などは入っているのでHome直行でもいいかと思いコメントアウト
+            // const userInfo = await loginWithGoogle();
+            // history.push(`/profile/${userInfo.user.uid}`);
+        } catch (error) {
+            console.error("error creating user", error);
+        }
+    }
 
     const formEventHandler = {
         onUserIdEnter,

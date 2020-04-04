@@ -3,6 +3,10 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import { auth, createUserProfileDocument } from "utils/firebase/firebase.utils";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
+
+import { GlobalStateContext } from "contexts";
+import logo from "font/851H-kktt_004.ttf";
+
 import Signup from "components/pages/Signup";
 import Login from "components/pages/Login";
 import Home from "components/pages/Home";
@@ -10,8 +14,8 @@ import CreatePost from "components/pages/CreatePost";
 import EditPost from "components/pages/EditPost";
 import Post from "components/pages/Post";
 import Profile from "components/pages/Profile";
-import { GlobalStateContext } from "contexts";
-import logo from "font/851H-kktt_004.ttf";
+import TermsOfUse from "components/pages/TermsOfUse";
+import PrivacyPolicy from "components/pages/PrivacyPolicy";
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -86,6 +90,12 @@ const Routes = () => {
                 </Switch>
             ) : (
                 <Switch>
+                    <Route path="/privacy-policy">
+                        <PrivacyPolicy />
+                    </Route>
+                    <Route path="/terms-of-use">
+                        <TermsOfUse />
+                    </Route>
                     <Route path="/signup">
                         <Signup />
                     </Route>

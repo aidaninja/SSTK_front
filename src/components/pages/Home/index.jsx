@@ -20,12 +20,13 @@ const Home = props => {
             const unsubscribe = postListRef.onSnapshot(snapshot => {
                 const fetchedList = map(snapshot.docs, doc => {
                     const id = doc.id;
-                    const { title, postedOn, user } = doc.data();
-                    return { id, title, postedOn, user };
+                    const { title, postedOn, user, isDeleted } = doc.data();
+                    if (!isDeleted) return { id, title, postedOn, user };
                 });
+                const activeList = fetchedList.filter(list => !!list);
                 snapshot.docChanges().forEach(change => {
                     if (change.type === "added") {
-                        updatePostItems([...fetchedList]);
+                        updatePostItems([...activeList]);
                     }
                 });
             });
@@ -48,7 +49,7 @@ const Home = props => {
                 ) : (
                     <CenteredLoader />
                 )}
-                <StyledCreatePostLink to='/post'>＋</StyledCreatePostLink>
+                <StyledCreatePostLink to="/post">＋</StyledCreatePostLink>
             </PageLayout>
         </>
     );
@@ -66,15 +67,15 @@ const StyledCreatePostLink = styled(Link)`
         padding: 1rem;
         font-size: 3.6rem;
         line-height: 1;
-        border: 2px solid #FFFFFF;
+        border: 2px solid #ffffff;
         border-radius: 100%;
-        color: #FFFFFF;
+        color: #ffffff;
         background-color: #3722d3;
         cursor: pointer;
-        transition: background-color .2s;
+        transition: background-color 0.2s;
 
         &:hover {
-            background-color: #A59FD4;
+            background-color: #a59fd4;
         }
     }
 `;

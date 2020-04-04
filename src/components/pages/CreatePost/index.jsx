@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { map } from "lodash";
+import { useHistory } from "react-router-dom";
 import PageLayout from "components/templates/PageLayout";
 import PageHeader from "components/organisms/PageHeader";
 import PostOverview from "components/organisms/PostOverview";
@@ -10,6 +11,7 @@ import { firestore } from "utils/firebase/firebase.utils";
 
 const CreatePost = props => {
     const { user, ...restProps } = props;
+    const history = useHistory();
     const [isOnPreview, switchPreview] = useState(false);
     const [isError, setIsError] = useState(false);
     const [postInput, updatePostInput] = useState({
@@ -43,22 +45,18 @@ const CreatePost = props => {
         const postedOn = new Date();
 
         try {
-            await postsRef.add({
-                ...postInput,
-                postedOn,
-                user
-            });
+            await postsRef
+                .add({
+                    ...postInput,
+                    postedOn,
+                    user
+                })
+                .then(() => {
+                    history.push("/");
+                });
         } catch (error) {
             console.log("error creating new post", error.message);
         }
-
-        updatePostInput({
-            title: "",
-            overview: "",
-            want: "",
-            current: ""
-        });
-        switchPreview(false);
     };
 
     const inputItems = [
@@ -138,11 +136,11 @@ const CreatePost = props => {
                             投稿する
                         </NormalButton>
                     </StyledButtonWrapper>
-                    {isError &&
-                    <StyledErrorText>
-                        全ての項目を入力して下さい
-                    </StyledErrorText>
-                    }
+                    {isError && (
+                        <StyledErrorText>
+                            全ての項目を入力して下さい
+                        </StyledErrorText>
+                    )}
                 </PageLayout>
             )}
         </>
@@ -178,6 +176,6 @@ const StyledErrorText = styled.p`
         margin: 3rem auto 0;
         font-size: 1.6rem;
         text-align: center;
-        color: #FF9393;
+        color: #ff9393;
     }
 `;

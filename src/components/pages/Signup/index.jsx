@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import SignupForm from "components/organisms/SignupForm";
 import TopLayout from "components/templates/TopLayout";
-import { auth, createUserProfileDocument } from "utils/firebase/firebase.utils";
+import { auth, createUserProfileDocument, loginWithGoogle as signUpWithGoogle } from "utils/firebase/firebase.utils";
 
 const Signup = props => {
     const [userInput, updateUserInput] = useState({
         email: null,
         password: null
     });
+    const history = useHistory();
 
     const onUserIdEnter = e => {
         e.preventDefault();
@@ -28,9 +30,10 @@ const Signup = props => {
                 password
             );
 
-            await createUserProfileDocument(user);
+            const userInfo = await createUserProfileDocument(user);
 
             updateUserInput({ email: null, password: null });
+            history.push(`/profile/${userInfo.id}`);
         } catch (error) {
             console.error("error creating user", error);
         }
@@ -39,7 +42,8 @@ const Signup = props => {
     const formEventHandler = {
         onUserIdEnter,
         onUserPasswordEnter,
-        onButtonClick
+        onButtonClick,
+        signUpWithGoogle
     };
     return (
         <TopLayout>

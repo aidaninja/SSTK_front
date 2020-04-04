@@ -28,8 +28,6 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Monaco', '游ゴシック体', 'YuGothic', sans-serif;
         font-size: 62.5%;
         background: #0E2339;
-        /* background: #150E2E; */
-        /*background: #1E364D; */
         color: #ECECEC;
         overflow-y: scroll;
     }
@@ -70,9 +68,6 @@ const Routes = () => {
             <GlobalStyle />
             {!!authUser ? (
                 <Switch>
-                    <Route exact path="/">
-                        <Home user={authUser} />
-                    </Route>
                     <Route exact path="/post">
                         <CreatePost user={authUser} />
                     </Route>
@@ -84,6 +79,9 @@ const Routes = () => {
                     </Route>
                     <Route path="/profile/:userId">
                         <Profile user={authUser} />
+                    </Route>
+                    <Route path="/">
+                        <Home user={authUser} />
                     </Route>
                 </Switch>
             ) : (

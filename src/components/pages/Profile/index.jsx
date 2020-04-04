@@ -58,9 +58,9 @@ const Profile = props => {
             const unsubscribe = postListRef.onSnapshot(snapshot => {
                 const fetchedList = map(snapshot.docs, doc => {
                     const id = doc.id;
-                    const { title, postedOn, user } = doc.data();
-                    if (userRef.id === user.id)
-                        return { id, title, postedOn, user };
+                    const { title, postedOn, user, isDeleted } = doc.data();
+                    if (userRef.id === user.id && !isDeleted)
+                        return { id, title, postedOn, user, isDeleted };
                 });
                 const userPostList = fetchedList.filter(list => {
                     return list !== undefined;
@@ -199,7 +199,7 @@ const Profile = props => {
                             <CenteredLoader />
                         )}
                     </StyledPostsBox>
-                    <StyledCreatePostLink to='/post'>＋</StyledCreatePostLink>
+                    <StyledCreatePostLink to="/post">＋</StyledCreatePostLink>
                 </div>
             )}
         </PageLayout>
@@ -224,15 +224,15 @@ const StyledCreatePostLink = styled(Link)`
         padding: 1rem;
         font-size: 3.6rem;
         line-height: 1;
-        border: 2px solid #FFFFFF;
+        border: 2px solid #ffffff;
         border-radius: 100%;
-        color: #FFFFFF;
+        color: #ffffff;
         background-color: #3722d3;
         cursor: pointer;
-        transition: background-color .2s;
+        transition: background-color 0.2s;
 
         &:hover {
-            background-color: #A59FD4;
+            background-color: #a59fd4;
         }
     }
 `;

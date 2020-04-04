@@ -7,15 +7,18 @@ import PostOverview from "components/organisms/PostOverview";
 import { firestore } from "utils/firebase/firebase.utils";
 import CommentSection from "components/organisms/CommentSection";
 import { CenteredLoader } from "components/organisms/Loader";
+import { WarningButton } from "components/atoms/Buttons";
 
 const Post = props => {
-    const { user, match } = props;
+    const { user, match, history } = props;
     const { postId } = match.params;
     const [post, updatePost] = useState(null);
     const [commentItems, updateCommentItems] = useState(null);
     const [comment, updateComment] = useState("");
     const [isError, setIsError] = useState(false);
     const postRef = firestore.doc(`posts/${postId}`);
+    const isOwner = post && post.user.id === user.id;
+
     useEffect(() => {
         //TODO(aida) utils/firebase/firebase.utilsに切り分ける
         //TODO(aida) ユーザとコメントや投稿の紐付けを最適化する。現状ユーザ情報が変更されたときに紐づいている要素の情報が更新できていない。
@@ -33,6 +36,11 @@ const Post = props => {
             unsubscribe();
         };
     }, []);
+
+    const onToEdit = e => {
+        e.preventDefault();
+        history.push(`/edit/${postId}`);
+    };
 
     const onSubmitComment = async e => {
         e.preventDefault();
@@ -84,10 +92,19 @@ const Post = props => {
             {post ? (
                 <>
                     <PageHeader>{post.title}</PageHeader>
-                    <PostOverview {...post} />
                     <div>
-                        <StyledLabel>コメント</StyledLabel>
-                        <CommentSection {...commentProps} />
+                        <PostOverview {...post} />
+                        {isOwner ? (
+                            <StyledButtonRow>
+                                <WarningButton onClick={onToEdit} size="small">
+                                    編集する
+                                </WarningButton>
+                            </StyledButtonRow>
+                        ) : null}
+                        <div>
+                            <StyledLabel>コメント</StyledLabel>
+                            <CommentSection {...commentProps} />
+                        </div>
                     </div>
                 </>
             ) : (
@@ -106,5 +123,14 @@ const StyledLabel = styled.p`
     && {
         font-size: 1.4rem;
         padding: 1rem 0;
+    }
+`;
+
+const StyledButtonRow = styled.div`
+    && {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        padding: 0 1rem;
     }
 `;

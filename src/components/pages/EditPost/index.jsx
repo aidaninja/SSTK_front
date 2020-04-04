@@ -9,9 +9,11 @@ import { NormalButton, AlertButton } from "components/atoms/Buttons";
 import { CenteredLoader } from "components/organisms/Loader";
 import { firestore } from "utils/firebase/firebase.utils";
 
+//TODO(aida)　データの取得周りはリファクタ必須
 const EditPost = props => {
     const { user, match, history, ...restProps } = props;
     const { postId } = match.params;
+    const [isLoaded, updateLoaded] = useState(false);
     const [postInput, updatePostInput] = useState(null);
     const postRef = firestore.doc(`posts/${postId}`);
 
@@ -50,8 +52,15 @@ const EditPost = props => {
         const fetchPost = () => {
             const unsubscribe = postRef.onSnapshot(snapshot => {
                 console.log(snapshot);
-                const { title, overview, current, want } = snapshot.data();
-                updatePostInput({ title, overview, current, want });
+                const {
+                    title,
+                    overview,
+                    current,
+                    want,
+                    user
+                } = snapshot.data();
+                updatePostInput({ title, overview, current, want, user });
+                updateLoaded(true);
             });
             return unsubscribe;
         };
@@ -61,6 +70,12 @@ const EditPost = props => {
             unsubscribe();
         };
     }, [postId]);
+
+    useEffect(() => {
+        if (postInput) {
+            postInput.user.id !== user.id && history.push(`/`);
+        }
+    }, [isLoaded]);
 
     const inputItems = [
         {
@@ -94,7 +109,7 @@ const EditPost = props => {
 
     return (
         <PageLayout user={user}>
-            <PageHeader>編集</PageHeader>
+            <PageHeader>{isLoaded ? "編集" : "-----"}</PageHeader>
             {postInput ? (
                 <>
                     <TextInputBox

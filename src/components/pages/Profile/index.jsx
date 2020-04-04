@@ -9,11 +9,12 @@ import EditProfileForm from "components/organisms/EditProfileForm";
 import PostItemList from "components/organisms/PostItemList";
 import { firestore, firestorage } from "utils/firebase/firebase.utils";
 import { CenteredLoader } from "components/organisms/Loader";
+import MessageBox from "components/organisms/MessageBox";
 
 //TODO(aida) プロフィール画像変更の処理は見直しが必要。現状選択するたびにアップロードしているので、これは良くない。
 
 const Profile = props => {
-    const { user, match } = props;
+    const { user, match, history } = props;
     //MEMO(aida) 表示対象のidを想定
     const { userId } = match.params;
     //MEMO(aida) ログイン中ユーザのidと表示対象のidを比較して自分のページかを判断
@@ -25,6 +26,7 @@ const Profile = props => {
         photoURL: null,
         intro: ""
     });
+    const [postItems, updatePostItems] = useState();
     const userRef = firestore.doc(`users/${userId}`);
 
     useEffect(() => {
@@ -43,6 +45,35 @@ const Profile = props => {
 
         const unsubscribe = fetchUser();
 
+        return () => {
+            unsubscribe();
+        };
+    }, [userId]);
+
+    useEffect(() => {
+        const fetchData = () => {
+            const postListRef = firestore
+                .collection("posts")
+                .orderBy("postedOn", "desc");
+            const unsubscribe = postListRef.onSnapshot(snapshot => {
+                const fetchedList = map(snapshot.docs, doc => {
+                    const id = doc.id;
+                    const { title, postedOn, user } = doc.data();
+                    if (userRef.id === user.id)
+                        return { id, title, postedOn, user };
+                });
+                const userPostList = fetchedList.filter(list => {
+                    return list !== undefined;
+                });
+                snapshot.docChanges().forEach(change => {
+                    if (change.type === "added") {
+                        updatePostItems([...userPostList]);
+                    }
+                });
+            });
+            return unsubscribe;
+        };
+        const unsubscribe = fetchData();
         return () => {
             unsubscribe();
         };
@@ -124,36 +155,10 @@ const Profile = props => {
         updateEditMode(false);
     };
 
-    const [postItems, updatePostItems] = useState();
-
-    useEffect(() => {
-        const fetchData = () => {
-            const postListRef = firestore
-                .collection("posts")
-                .orderBy("postedOn", "desc");
-            const unsubscribe = postListRef.onSnapshot(snapshot => {
-                const fetchedList = map(snapshot.docs, doc => {
-                    const id = doc.id;
-                    const { title, postedOn, user } = doc.data();
-                    if (userRef.id === user.id)
-                        return { id, title, postedOn, user };
-                });
-                const userPostList = fetchedList.filter(list => {
-                    return list !== undefined;
-                });
-                snapshot.docChanges().forEach(change => {
-                    if (change.type === "added") {
-                        updatePostItems([...userPostList]);
-                    }
-                });
-            });
-            return unsubscribe;
-        };
-        const unsubscribe = fetchData();
-        return () => {
-            unsubscribe();
-        };
-    }, []);
+    const onClickToPost = e => {
+        e.preventDefault();
+        history.push("/post");
+    };
 
     return (
         <PageLayout user={user}>
@@ -178,9 +183,18 @@ const Profile = props => {
                     <StyledPostsBox>
                         <PageHeader>Posts</PageHeader>
                         {postItems ? (
-                            <StyledPostsBox>
-                                <PostItemList postItems={postItems} />
-                            </StyledPostsBox>
+                            postItems.length ? (
+                                <StyledPostsBox>
+                                    <PostItemList postItems={postItems} />
+                                </StyledPostsBox>
+                            ) : (
+                                <StyledMessageBox
+                                    message="投稿がありません"
+                                    isVisibleButton={isOwner}
+                                    buttonText="投稿を作成する"
+                                    onClick={onClickToPost}
+                                />
+                            )
                         ) : (
                             <CenteredLoader />
                         )}
@@ -194,6 +208,12 @@ const Profile = props => {
 export default withRouter(Profile);
 
 const StyledPostsBox = styled.div`
+    && {
+        margin-top: 3rem;
+    }
+`;
+
+const StyledMessageBox = styled(MessageBox)`
     && {
         margin-top: 3rem;
     }

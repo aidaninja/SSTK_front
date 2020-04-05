@@ -42,7 +42,7 @@ const LoginForm = props => {
                         </StyledFooterLink>
                         に
                         <br />
-                        同意しているとみなします
+                        同意していることとします
                     </p>
                 </div>
             </StyledFormFooter>

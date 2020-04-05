@@ -10,7 +10,12 @@ const CommentInput = props => {
             <TextInputBox input={input} textarea={true} />
             <StyledButtonBlock>
                 {isError && (
-                    <StyledErrorText>コメントが未入力です😡</StyledErrorText>
+                    <StyledErrorText>
+                        コメントが未入力です
+                        <span role="img" aria-label="emoji">
+                            😡
+                        </span>
+                    </StyledErrorText>
                 )}
                 <StyledCommentButton size="small" onClick={onClick}>
                     コメント

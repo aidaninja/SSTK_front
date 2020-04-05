@@ -11,7 +11,7 @@ import { firestore } from "utils/firebase/firebase.utils";
 
 //TODO(aida)　データの取得周りはリファクタ必須
 const EditPost = props => {
-    const { user, match, history, ...restProps } = props;
+    const { user, match, history } = props;
     const { postId } = match.params;
     const [isLoaded, updateLoaded] = useState(false);
     const [postInput, updatePostInput] = useState(null);
@@ -26,7 +26,6 @@ const EditPost = props => {
         e.preventDefault();
         try {
             console.log("[delete] deleteing post ...");
-            console.log(postRef);
             postRef.update({ isDeleted: true }).then(() => {
                 history.push(`/`);
             });
@@ -51,7 +50,6 @@ const EditPost = props => {
     useEffect(() => {
         const fetchPost = () => {
             const unsubscribe = postRef.onSnapshot(snapshot => {
-                console.log(snapshot);
                 const {
                     title,
                     overview,
@@ -69,7 +67,7 @@ const EditPost = props => {
         return () => {
             unsubscribe();
         };
-    }, [postId]);
+    }, [postId, postRef]);
 
     useEffect(() => {
         if (postInput) {

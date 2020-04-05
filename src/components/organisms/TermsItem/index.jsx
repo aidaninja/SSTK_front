@@ -11,17 +11,13 @@ const TermsListItem = props => {
             <StyledListItem>
                 {`${i + 1}) ${text}`}
                 <ul>
-                    {map(
-                        nested,
-                        (item, i) =>
-                            console.log(item) || (
-                                <TermsListItem
-                                    key={`terms_${item}-${i}`}
-                                    item={item}
-                                    i={i}
-                                />
-                            )
-                    )}
+                    {map(nested, (item, i) => (
+                        <TermsListItem
+                            key={`terms_${item}-${i}`}
+                            item={item}
+                            i={i}
+                        />
+                    ))}
                 </ul>
             </StyledListItem>
         </>

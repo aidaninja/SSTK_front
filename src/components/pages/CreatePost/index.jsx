@@ -10,7 +10,7 @@ import { NormalButton } from "components/atoms/Buttons";
 import { firestore } from "utils/firebase/firebase.utils";
 
 const CreatePost = props => {
-    const { user, ...restProps } = props;
+    const { user } = props;
     const history = useHistory();
     const [isOnPreview, switchPreview] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -34,7 +34,6 @@ const CreatePost = props => {
         e.preventDefault();
         const { title, overview, want, current } = postInput;
         if (!title || !overview || !want || !current) {
-            console.log(postInput);
             console.log("[create post] some field is empty ...");
             setIsError(true);
             return;
@@ -137,7 +136,12 @@ const CreatePost = props => {
                         </NormalButton>
                     </StyledButtonWrapper>
                     {isError && (
-                        <StyledErrorText>項目が未入力です😡</StyledErrorText>
+                        <StyledErrorText>
+                            項目が未入力です
+                            <span role="img" aria-label="emoji">
+                                😡
+                            </span>
+                        </StyledErrorText>
                     )}
                 </PageLayout>
             )}

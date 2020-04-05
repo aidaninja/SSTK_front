@@ -44,7 +44,6 @@ const GlobalStyle = createGlobalStyle`
 
 const Routes = () => {
     const { authUser, setAuthUser } = useContext(GlobalStateContext);
-    console.log(authUser, "Provider authUser");
 
     useEffect(() => {
         //MEMO(aida) 認証情報の状態が変化した際に実行する処理を登録する
@@ -52,7 +51,6 @@ const Routes = () => {
             //MEMO(aida) ログインした際に認証に紐づいたuser情報をstateに格納
             if (!!userAuth) {
                 const userRef = await createUserProfileDocument(userAuth);
-                console.log(userRef);
                 userRef.onSnapshot(snapShot => {
                     setAuthUser({ id: snapShot.id, ...snapShot.data() });
                 });
@@ -65,7 +63,7 @@ const Routes = () => {
         return () => {
             unsubscribe();
         };
-    }, []);
+    }, [setAuthUser]);
 
     return (
         <Router>

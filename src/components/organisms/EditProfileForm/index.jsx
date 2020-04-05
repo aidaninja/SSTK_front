@@ -32,7 +32,7 @@ const EditProflieTextArea = props => {
 };
 
 const EditProfilePicture = props => {
-    const { label, current, onChange, ...restProps } = props;
+    const { label, current, onChange } = props;
 
     return (
         <div>

@@ -35,7 +35,7 @@ const Post = props => {
         return () => {
             unsubscribe();
         };
-    }, []);
+    }, [postRef]);
 
     const onToEdit = e => {
         e.preventDefault();

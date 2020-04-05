@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { map } from "lodash";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PageLayout from "components/templates/PageLayout";
 import PageHeader from "components/organisms/PageHeader";
 import ProfileBox from "components/organisms/ProfileBox";
@@ -49,7 +49,7 @@ const Profile = props => {
         return () => {
             unsubscribe();
         };
-    }, [userId]);
+    }, [userId, userRef]);
 
     useEffect(() => {
         const fetchData = () => {
@@ -78,7 +78,7 @@ const Profile = props => {
         return () => {
             unsubscribe();
         };
-    }, [userId]);
+    }, [userId, userRef.id]);
 
     const onChangeEditMode = e => {
         e.preventDefault();
@@ -112,7 +112,7 @@ const Profile = props => {
             uploadTask.on(
                 "state_changed",
                 snapshot => {
-                    console.log(snapshot);
+                    // console.log(snapshot);
                 },
                 () => {},
                 () => {
@@ -121,7 +121,7 @@ const Profile = props => {
                         .child(user.id)
                         .getDownloadURL()
                         .then(firebaseURL => {
-                            console.log(firebaseURL);
+                            // console.log(firebaseURL);
                             updateEditInput({
                                 ...editInput,
                                 photoURL: firebaseURL

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import FormBox from "components/molecules/FormBox";
-import { NormalInput } from "components/atoms/Inputs";
+import { NormalInput, PasswordInput } from "components/atoms/Inputs";
 import { NormalButton, GoogleSignInButton } from "components/atoms/Buttons";
 import { Link } from "react-router-dom";
 
@@ -52,11 +52,16 @@ const SignupForm = props => {
         ),
         inputs: [
             <NormalInput
+                label="ユーザ名"
+                placeholder="ユーザ名を入力..."
+                onChange={onUserNameEnter}
+            />,
+            <NormalInput
                 label="e-mail"
                 onChange={onUserIdEnter}
                 placeholder="e-mailを入力..."
             />,
-            <NormalInput
+            <PasswordInput
                 label="パスワード"
                 onChange={onUserPasswordEnter}
                 placeholder="パスワードを入力..."

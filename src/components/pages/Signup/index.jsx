@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import SignupForm from "components/organisms/SignupForm";
 import TopLayout from "components/templates/TopLayout";
-import { auth, createUserProfileDocument, loginWithGoogle } from "utils/firebase/firebase.utils";
+import {
+    auth,
+    createUserProfileDocument,
+    loginWithGoogle
+} from "utils/firebase/firebase.utils";
 
 const Signup = props => {
     const [userInput, updateUserInput] = useState({
+        displayName: null,
         email: null,
         password: null
     });
-    const history = useHistory();
+
+    const onUserNameEnter = e => {
+        e.preventDefault();
+        updateUserInput({ ...userInput, displayName: e.target.value });
+    };
 
     const onUserIdEnter = e => {
         e.preventDefault();
@@ -21,8 +29,11 @@ const Signup = props => {
     };
     const onButtonClick = async e => {
         e.preventDefault();
-        const { email, password } = userInput;
-        if (!email | !password) return;
+        const { displayName, email, password } = userInput;
+        if (!displayName | !email | !password) {
+            console.log("[sign up] some inputs are missing ...");
+            return;
+        }
 
         try {
             const { user } = await auth.createUserWithEmailAndPassword(
@@ -30,10 +41,11 @@ const Signup = props => {
                 password
             );
 
-            const userInfo = await createUserProfileDocument(user);
+            await createUserProfileDocument(user, {
+                displayName
+            });
 
             updateUserInput({ email: null, password: null });
-            history.push(`/profile/${userInfo.id}`);
         } catch (error) {
             console.error("error creating user", error);
         }
@@ -42,16 +54,13 @@ const Signup = props => {
     const signUpWithGoogle = async () => {
         try {
             await loginWithGoogle();
-            history.push("/");
-            // TODO(inoue): こっちだとプロファイルに遷移、でもgoogleの時は名前などは入っているのでHome直行でもいいかと思いコメントアウト
-            // const userInfo = await loginWithGoogle();
-            // history.push(`/profile/${userInfo.user.uid}`);
         } catch (error) {
             console.error("error creating user", error);
         }
-    }
+    };
 
     const formEventHandler = {
+        onUserNameEnter,
         onUserIdEnter,
         onUserPasswordEnter,
         onButtonClick,
@@ -59,10 +68,7 @@ const Signup = props => {
     };
     return (
         <TopLayout>
-            <SignupForm
-                style={{ margin: "5rem auto" }}
-                {...formEventHandler}
-            />
+            <SignupForm style={{ margin: "5rem auto" }} {...formEventHandler} />
         </TopLayout>
     );
 };

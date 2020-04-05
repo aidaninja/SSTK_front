@@ -41,6 +41,7 @@ const CreatePost = props => {
         setIsError(false);
 
         const postsRef = firestore.collection("posts");
+        const userRef = firestore.doc(`users/${user.id}`);
         const postedOn = new Date();
 
         try {
@@ -48,7 +49,8 @@ const CreatePost = props => {
                 .add({
                     ...postInput,
                     postedOn,
-                    user
+                    user,
+                    userRef
                 })
                 .then(() => {
                     history.push("/");

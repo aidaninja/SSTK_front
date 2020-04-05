@@ -6,7 +6,7 @@ import { RoundImage } from "components/atoms/Imgs";
 import { WarningButton } from "components/atoms/Buttons";
 
 const ProfileBox = props => {
-    const { user, onEditProfile, isOwner, ...restProps } = props;
+    const { user, onEditProfile, isOwner } = props;
     return (
         <StyledProfileBox>
             <StyledProfileImage border="medium" src={get(user, "photoURL")} />

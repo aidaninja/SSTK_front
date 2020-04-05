@@ -35,7 +35,7 @@ const Post = props => {
         return () => {
             unsubscribe();
         };
-    }, []);
+    }, [postRef]);
 
     const onToEdit = e => {
         e.preventDefault();
@@ -50,13 +50,14 @@ const Post = props => {
             return;
         }
         setIsError(false);
+        const userRef = firestore.doc(`users/${user.id}`);
         const snapshot = await postRef.get();
         const currentPostDocument = snapshot.data();
         const { commentItems = [] } = currentPostDocument;
         const createdAt = new Date();
         const newCommentItems = [
             ...commentItems,
-            { comment: comment, user: user, createdAt }
+            { comment: comment, user: user, createdAt, userRef }
         ];
         try {
             updateComment("");
@@ -87,7 +88,6 @@ const Post = props => {
     };
 
     return (
-        // TODO(aida) loading中の表示を追加する
         <PageLayout user={user}>
             {post ? (
                 <>

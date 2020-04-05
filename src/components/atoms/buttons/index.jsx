@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import googleButton from "img/button/signin_google.png";
 
 const Button = props => {
     const {
@@ -88,5 +89,18 @@ const StyledButton = styled.button`
         ${props => colorPicker(props)}
     }
 `;
+
+const StyledGoogleButton = styled(NormalButton)`
+    && {
+        background: none;
+        padding: 0;
+        min-height: 3.4rem;
+        background-image: url(${googleButton});
+        background-size: cover;
+        border: none;
+        min-width: 14rem;
+    }
+`;
+export const GoogleSignInButton = StyledGoogleButton;
 
 export default Button;

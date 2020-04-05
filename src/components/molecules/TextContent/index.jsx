@@ -21,16 +21,19 @@ const StyledTextContent = styled.div`
 
 const StyledHeader = styled.p`
     && {
+        padding: 0.5rem 1rem;
         margin-top: 1rem;
-        font-size: 1.8rem;
-        font-weight: 500;
+        max-width: 12rem;
+        font-size: 1.4rem;
+        border-bottom: 0.2rem solid #0e2339;
+        display: inline-block;
     }
 `;
 
 const StyledText = styled.p`
     && {
         margin-top: 1rem;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         line-height: 1.8;
         white-space: pre-wrap;
     }
